@@ -22,6 +22,6 @@ public class Home extends AppCompatActivity {
         btn=(Button) findViewById(R.id.button);
 
         title.setText("Hello "+"@User");
-        btn.setText("LOGIN");
+        btn.setText("LOGOUT");
     }
 }
