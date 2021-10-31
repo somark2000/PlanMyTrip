@@ -48,6 +48,13 @@ public class Login extends AppCompatActivity {
         });
 
         mAuth=FirebaseAuth.getInstance();
+        //autologin
+        if(mAuth.getCurrentUser()!=null){
+            //user is signed in
+            Toast.makeText(getApplicationContext(),"Redirecting...",Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(Login.this,Home.class));
+            finish();
+        }
     }
 
     private void openRegister(){
