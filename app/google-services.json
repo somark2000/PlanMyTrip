@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "680190607080",
+    "project_id": "planmytrip-smx2",
+    "storage_bucket": "planmytrip-smx2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:680190607080:android:76e122fec8cf3dd1d3935d",
+        "android_client_info": {
+          "package_name": "Lab.planmytrip"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "680190607080-aeifsg64dva7ps8asu21sivjcelivnuq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBaqVzqAP2zFjhFLlypSwYmf12qXraYJm4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "680190607080-aeifsg64dva7ps8asu21sivjcelivnuq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

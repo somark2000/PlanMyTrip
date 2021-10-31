@@ -42,28 +42,16 @@
         app:layout_constraintTop_toBottomOf="@+id/fname" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName3"
-        android:layout_width="0dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="4dp"
-        android:ems="10"
-        android:hint="Username"
-        android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/lname" />
-
-    <EditText
         android:id="@+id/passw1"
         android:layout_width="0dp"
         android:layout_height="50dp"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="58dp"
         android:ems="10"
         android:hint="Password"
         android:inputType="textPassword"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName3" />
+        app:layout_constraintTop_toBottomOf="@+id/lname" />
 
     <EditText
         android:id="@+id/phone"
@@ -75,7 +63,7 @@
         android:inputType="phone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/email" />
+        app:layout_constraintTop_toBottomOf="@+id/emailReg" />
 
     <EditText
         android:id="@+id/passw2"
@@ -90,7 +78,7 @@
         app:layout_constraintTop_toBottomOf="@+id/passw1" />
 
     <EditText
-        android:id="@+id/email"
+        android:id="@+id/emailReg"
         android:layout_width="0dp"
         android:layout_height="50dp"
         android:layout_marginTop="4dp"
