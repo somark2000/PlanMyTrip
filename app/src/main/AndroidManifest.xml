@@ -3,16 +3,17 @@
     package="Lab.planmytrip">
 
     <application
-        android:fullBackupOnly="true"
         android:allowBackup="true"
+        android:fullBackupOnly="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.PlanMyTrip">
         <activity
-            android:name=".Home"
-            android:exported="false" />
+            android:name=".Index"
+            android:exported="false"
+            android:label="@string/title_activity_index" />
         <activity
             android:name=".Register"
             android:exported="true" />

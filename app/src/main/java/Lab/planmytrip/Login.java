@@ -52,7 +52,7 @@ public class Login extends AppCompatActivity {
         if(mAuth.getCurrentUser()!=null){
             //user is signed in
             Toast.makeText(getApplicationContext(),"Redirecting...",Toast.LENGTH_SHORT).show();
-            startActivity(new Intent(Login.this,Home.class));
+            startActivity(new Intent(Login.this,Index.class));
             finish();
         }
     }
@@ -88,7 +88,7 @@ public class Login extends AppCompatActivity {
                 if(task.isSuccessful()){
                     //redirect to home
                     Toast.makeText(getApplicationContext(),"Redirecting...",Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(Login.this,Home.class));
+                    startActivity(new Intent(Login.this,Index.class));
                 }else{
                     Toast.makeText(getApplicationContext(), "Failed to login!\n Please check your credentials.",Toast.LENGTH_LONG).show();
                 }
