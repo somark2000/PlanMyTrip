@@ -59,10 +59,11 @@ public class Register extends AppCompatActivity {
                 int year = cldr.get(Calendar.YEAR);
                 // date picker dialog
                 picker = new DatePickerDialog(Register.this, new DatePickerDialog.OnDateSetListener() {
-                    @SuppressLint("SetTextI18n")
+
+                    @SuppressLint("DefaultLocale")
                     @Override
                     public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                        bdate.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
+                        bdate.setText(String.format("%d/%d/%d", dayOfMonth, monthOfYear + 1, year));
                     }
                 }, year, month, day);
                 picker.show();
@@ -88,17 +89,17 @@ public class Register extends AppCompatActivity {
         String s_phonenr = phonenr.getText().toString().trim();
 
         if (s_fname.isEmpty()) {
-            fname.setError("First name is required!");
+            fname.setError(getString(R.string.required_firstName));
             fname.requestFocus();
             return;
         }
         if (s_lname.isEmpty()) {
-            lname.setError("Last name is required!");
+            lname.setError(getString(R.string.required_lastName));
             lname.requestFocus();
             return;
         }
         if (s_passw1.isEmpty()) {
-            passw1.setError("Password is required!");
+            passw1.setError(getString(R.string.required_password));
             passw1.requestFocus();
             return;
         }
@@ -108,31 +109,31 @@ public class Register extends AppCompatActivity {
 //            return;
 //        }
         if (!s_passw1.equals(s_passw2) || s_passw1.length() < 6) {
-            passw2.setError("Passwords should be the same and longer than 6 characters!");
+            passw2.setError(getString(R.string.validation_password));
             passw1.requestFocus();
             passw2.requestFocus();
             return;
         }if (s_mail.isEmpty()) {
-            mail.setError("Email is required!");
+            mail.setError(getString(R.string.required_email));
             mail.requestFocus();
             return;
         }
         if (!Patterns.EMAIL_ADDRESS.matcher(s_mail).matches()) {
-            mail.setError("Please provide an valid email!\nEx: abc@abc.abc");
+            mail.setError(getString(R.string.valid_email_R));
             mail.requestFocus();
             return;
         }if (s_phonenr.isEmpty()) {
-            phonenr.setError("Phone number is required!");
+            phonenr.setError(getString(R.string.required_phoneNumber));
             phonenr.requestFocus();
             return;
         }
         if(!Patterns.PHONE.matcher(s_phonenr).matches()){
-            phonenr.setError("Please provide an valid phone number!");
+            phonenr.setError(getString(R.string.valid_phoneNumber));
             phonenr.requestFocus();
             return;
         }
         if (s_bdate.isEmpty()) {
-            bdate.setError("Birthdate is required!");
+            bdate.setError(getString(R.string.required_birthdate));
             bdate.requestFocus();
             return;
         }

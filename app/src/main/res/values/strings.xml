@@ -4,4 +4,16 @@
     <string name="title_map">Map</string>
     <string name="title_trips">Trips</string>
     <string name="title_profile">Profile</string>
+    <string name="logout">LOGOUT</string>
+    <string name="greeting">Hello</string>
+    <string name="required_email">Email is required!</string>
+    <string name="valid_email">Please enter a valid email!</string>
+    <string name="required_password">Password is required!</string>
+    <string name="required_firstName">First name is required!</string>
+    <string name="required_lastName">Last name is required!</string>
+    <string name="required_birthdate">Birthdate is required!</string>
+    <string name="required_phoneNumber">Phone number is required!</string>
+    <string name="valid_phoneNumber">Please provide an valid phone number!</string>
+    <string name="valid_email_R">Please provide an valid email!\nEx: abc@abc.abc</string>
+    <string name="validation_password">Passwords should be the same and longer than 6 characters!</string>
 </resources>

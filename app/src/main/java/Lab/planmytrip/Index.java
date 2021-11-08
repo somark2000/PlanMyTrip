@@ -31,15 +31,6 @@ public class Index extends AppCompatActivity {
 
     private ActivityIndexBinding binding;
 
-    private TextView title;
-    private Button btn;
-
-    private FirebaseUser user;
-    private DatabaseReference reference;
-
-    private String userID;
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,39 +48,7 @@ public class Index extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(binding.navView, navController);
 
-        user= FirebaseAuth.getInstance().getCurrentUser();
-        reference= FirebaseDatabase.getInstance().getReference("Users");
-        userID= user.getUid();
 
-        title=(TextView) findViewById(R.id.textView);
-        btn=(Button) findViewById(R.id.button);
-
-        reference.child(userID).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                User userProfile= snapshot.getValue(User.class);
-
-                if(userProfile!=null){
-                    String fullName= userProfile.fname+" "+userProfile.lname;
-                    title.setText("Hello\n"+fullName+"!");
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(Index.this,"Something wrong happened!",Toast.LENGTH_LONG).show();
-            }
-        });
-
-        btn.setText("LOGOUT");
-        btn=(Button) findViewById(R.id.button);
-        btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                FirebaseAuth.getInstance().signOut();
-                startActivity(new Intent(Index.this,Login.class));
-            }
-        });
     }
 
 }

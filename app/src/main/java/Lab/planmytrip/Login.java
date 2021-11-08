@@ -67,17 +67,17 @@ public class Login extends AppCompatActivity {
         String passw=ed2.getText().toString().trim();
 
         if(email.isEmpty()){
-            ed1.setError("Email is required!");
+            ed1.setError(getString(R.string.required_email));
             ed1.requestFocus();
             return;
         }
         if(!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
-            ed1.setError("Please enter a valid email!");
+            ed1.setError(getString(R.string.valid_email));
             ed1.requestFocus();
             return;
         }
         if(passw.isEmpty()){
-            ed2.setError("Password is required!");
+            ed2.setError(getString(R.string.required_password));
             ed2.requestFocus();
             return;
         }
