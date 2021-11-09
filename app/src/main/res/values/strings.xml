@@ -16,4 +16,14 @@
     <string name="valid_phoneNumber">Please provide an valid phone number!</string>
     <string name="valid_email_R">Please provide an valid email!\nEx: abc@abc.abc</string>
     <string name="validation_password">Passwords should be the same and longer than 6 characters!</string>
+    <string name="login">Login</string>
+    <string name="register">Register</string>
+    <string name="first_name">First Name</string>
+    <string name="last_name">Last Name</string>
+    <string name="password">Password</string>
+    <string name="password2">Re-enter Password</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="e_mail">E-mail</string>
+    <string name="done">Done</string>
+    <string name="birth_date">Birth Date</string>
 </resources>
