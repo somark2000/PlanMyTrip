@@ -8,9 +8,12 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.google.android.gms.maps.MapView;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class Map extends AppCompatActivity {
+
+    private MapView mapView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,5 +48,7 @@ public class Map extends AppCompatActivity {
                 return false;
             }
         });
+
+        mapView=(MapView) findViewById(R.id.mapView);
     }
 }

@@ -11,6 +11,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PlanMyTrip">
         <activity
+            android:name=".Package"
+            android:exported="false" />
+        <activity
             android:name=".Map"
             android:exported="false" />
         <activity
@@ -19,10 +22,6 @@
         <activity
             android:name=".Profile"
             android:exported="false" />
-        <activity
-            android:name=".Index"
-            android:exported="false"
-            android:label="@string/title_activity_index" />
         <activity
             android:name=".Register"
             android:exported="true" />

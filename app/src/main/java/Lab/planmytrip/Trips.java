@@ -39,9 +39,16 @@ public class Trips extends AppCompatActivity {
 //                        Intent intent3 = new Intent(Trips.this, Trips.class);
 //                        startActivity(intent3);
                         break;
+                    default:
+                        throw new IllegalStateException("Unexpected value: " + item.getItemId());
                 }
                 return false;
             }
         });
+
+//        case R.id.create_package:
+//        Intent intent4 = new Intent(Trips.this, Package.class);
+//        startActivity(intent4);
+//        break;
     }
 }

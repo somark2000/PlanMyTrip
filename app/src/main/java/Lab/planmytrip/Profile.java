@@ -65,6 +65,8 @@ public class Profile extends AppCompatActivity {
                         Intent intent3 = new Intent(Profile.this, Trips.class);
                         startActivity(intent3);
                         break;
+                    default:
+                        throw new IllegalStateException("Unexpected value: " + item.getItemId());
                 }
                 return false;
             }
