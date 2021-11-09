@@ -56,14 +56,17 @@ public class Profile extends AppCompatActivity {
                     case R.id.navigation_map:
                         Intent intent1 = new Intent(Profile.this, Map.class);
                         startActivity(intent1);
+                        overridePendingTransition(0, 0);
                         break;
                     case R.id.navigation_profile:
 //                        Intent intent2 = new Intent(Trips.this, Profile.class);
 //                        startActivity(intent2);
+//                        overridePendingTransition(0, 0);
                         break;
                     case R.id.navigation_trips:
                         Intent intent3 = new Intent(Profile.this, Trips.class);
                         startActivity(intent3);
+                        overridePendingTransition(0, 0);
                         break;
                     default:
                         throw new IllegalStateException("Unexpected value: " + item.getItemId());

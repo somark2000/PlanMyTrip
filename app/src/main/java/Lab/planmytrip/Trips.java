@@ -7,10 +7,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class Trips extends AppCompatActivity {
+
+    private Button createPackageList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,6 +22,7 @@ public class Trips extends AppCompatActivity {
         setContentView(R.layout.activity_trips);
 
         BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.nav_view);
+        createPackageList=(Button)findViewById(R.id.create_package_list);
 
         Menu menu = bottomNavigationView.getMenu();
         MenuItem menuItem = menu.getItem(2);
@@ -30,14 +35,17 @@ public class Trips extends AppCompatActivity {
                     case R.id.navigation_map:
                         Intent intent1 = new Intent(Trips.this, Map.class);
                         startActivity(intent1);
+                        overridePendingTransition(0, 0);
                         break;
                     case R.id.navigation_profile:
                         Intent intent2 = new Intent(Trips.this, Profile.class);
                         startActivity(intent2);
+                        overridePendingTransition(0, 0);
                         break;
                     case R.id.navigation_trips:
 //                        Intent intent3 = new Intent(Trips.this, Trips.class);
 //                        startActivity(intent3);
+//                        overridePendingTransition(0, 0);
                         break;
                     default:
                         throw new IllegalStateException("Unexpected value: " + item.getItemId());
@@ -46,9 +54,19 @@ public class Trips extends AppCompatActivity {
             }
         });
 
+        createPackageList.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) { openCreatePackageList(); }
+        });
+
 //        case R.id.create_package:
 //        Intent intent4 = new Intent(Trips.this, Package.class);
 //        startActivity(intent4);
 //        break;
+    }
+
+    private void openCreatePackageList(){
+        Intent intent=new Intent(this,Package.class);
+        startActivity(intent);
     }
 }

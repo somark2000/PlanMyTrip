@@ -19,14 +19,14 @@
         app:menu="@menu/bottom_nav_menu" />
 
     <Button
-        android:id="@+id/create_package"
+        android:id="@+id/create_package_list"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="100dp"
         android:layout_marginTop="300dp"
         android:layout_marginEnd="100dp"
         android:layout_marginBottom="300dp"
-        android:text="@string/create_package"
+        android:text="@string/create_package_list"
         app:layout_constraintBottom_toTopOf="@+id/nav_view"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
