@@ -23,7 +23,10 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Objects;
 
 public class Register extends AppCompatActivity {
@@ -37,6 +40,8 @@ public class Register extends AppCompatActivity {
     private FirebaseFirestore db;
 
     private String userID;
+
+    SimpleDateFormat sdf;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,18 +85,25 @@ public class Register extends AppCompatActivity {
         b1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                registerUser();
+                try {
+                    registerUser();
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
             }
         });
     }
 
-    private void registerUser() {
+    private void registerUser() throws ParseException {
         String s_fname = fname.getText().toString().trim();
         String s_lname = lname.getText().toString().trim();
         String s_passw1 = passw1.getText().toString().trim();
         String s_passw2 = passw2.getText().toString().trim();
         String s_mail = mail.getText().toString().trim();
-        String s_bdate = bdate.getText().toString().trim();
+
+        sdf = new SimpleDateFormat(getString(R.string.date_format));
+
+        Date s_bdate = sdf.parse(bdate.getText().toString().trim());
         String s_phonenr = phonenr.getText().toString().trim();
 
         if (s_fname.isEmpty()) {
@@ -140,7 +152,7 @@ public class Register extends AppCompatActivity {
             phonenr.requestFocus();
             return;
         }
-        if (s_bdate.isEmpty()) {
+        if (s_bdate== null) {
             bdate.setError(getString(R.string.required_birthdate));
             bdate.requestFocus();
             return;
@@ -152,7 +164,7 @@ public class Register extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
-                            User user = new User(s_fname, s_lname, s_passw1, s_mail, s_bdate, s_phonenr);
+                            User user = new User(s_fname, s_lname, s_mail, s_passw1, s_phonenr, s_bdate);
                             userID = Objects.requireNonNull(mAuth.getCurrentUser()).getUid();
 
                             db.collection("users").document(userID)

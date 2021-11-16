@@ -107,7 +107,7 @@ public class Profile extends AppCompatActivity {
                             phone.setText(curr_user.phone);
                             email.setText(curr_user.email);
                             passw.setText(curr_user.passw);
-                            bdate.setText(curr_user.date);
+                            bdate.setText((CharSequence) curr_user.date);
                         } else {
                             Toast.makeText(Profile.this, "Something wrong happened!" + userID, Toast.LENGTH_LONG).show();
                         }
