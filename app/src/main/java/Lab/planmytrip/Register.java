@@ -16,22 +16,27 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.Calendar;
 import java.util.Objects;
 
 public class Register extends AppCompatActivity {
-    Button b1;
-    EditText fname, lname, passw1, passw2, mail, bdate, phonenr;//fname,lname,uname, passw,repassw,mail,date
-    DatePickerDialog picker;
+    private Button b1;
+    private EditText fname, lname, passw1, passw2, mail, bdate, phonenr;//fname,lname,uname, passw,repassw,mail,date
+    private DatePickerDialog picker;
 
     //progressbar????
 
     private FirebaseAuth mAuth;
+    private FirebaseFirestore db;
+
+    private String userID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +45,7 @@ public class Register extends AppCompatActivity {
 
         // Initialize Firebase Auth
         mAuth = FirebaseAuth.getInstance();
+        db = FirebaseFirestore.getInstance();
 
         fname = (EditText) findViewById(R.id.fname);
         lname = (EditText) findViewById(R.id.lname);
@@ -113,7 +119,8 @@ public class Register extends AppCompatActivity {
             passw1.requestFocus();
             passw2.requestFocus();
             return;
-        }if (s_mail.isEmpty()) {
+        }
+        if (s_mail.isEmpty()) {
             mail.setError(getString(R.string.required_email));
             mail.requestFocus();
             return;
@@ -122,12 +129,13 @@ public class Register extends AppCompatActivity {
             mail.setError(getString(R.string.valid_email_R));
             mail.requestFocus();
             return;
-        }if (s_phonenr.isEmpty()) {
+        }
+        if (s_phonenr.isEmpty()) {
             phonenr.setError(getString(R.string.required_phoneNumber));
             phonenr.requestFocus();
             return;
         }
-        if(!Patterns.PHONE.matcher(s_phonenr).matches()){
+        if (!Patterns.PHONE.matcher(s_phonenr).matches()) {
             phonenr.setError(getString(R.string.valid_phoneNumber));
             phonenr.requestFocus();
             return;
@@ -137,31 +145,37 @@ public class Register extends AppCompatActivity {
             bdate.requestFocus();
             return;
         }
+
         mAuth.createUserWithEmailAndPassword(s_mail, s_passw1)
-                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
+                            // Sign in success, update UI with the signed-in user's information
                             User user = new User(s_fname, s_lname, s_passw1, s_mail, s_bdate, s_phonenr);
+                            userID = Objects.requireNonNull(mAuth.getCurrentUser()).getUid();
 
-                            FirebaseDatabase.getInstance().getReference("Users")
-                                    .child(Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid())
-                                    .setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                @Override
-                                public void onComplete(@NonNull Task<Void> task) {
-                                    if (task.isSuccessful()) {
-                                        Toast.makeText(Register.this, "User has been registered successfully!", Toast.LENGTH_LONG).show();
+                            db.collection("users").document(userID)
+                                    .set(user)
+                                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                        @Override
+                                        public void onSuccess(Void aVoid) {
+                                            Toast.makeText(Register.this, "User has been registered successfully!", Toast.LENGTH_LONG).show();
+                                        }
+                                    })
+                                    .addOnFailureListener(new OnFailureListener() {
+                                        @Override
+                                        public void onFailure(@NonNull Exception e) {
+                                            Toast.makeText(Register.this, "Failed to register!\n Try again!", Toast.LENGTH_LONG).show();
+                                        }
+                                    });
 
-                                        //redirect to login layout!
-                                        Intent intentr = new Intent(Register.this, Login.class);
-                                        startActivity(intentr);
-                                    } else {
-                                        Toast.makeText(Register.this, "Failed to register!\n Try again!", Toast.LENGTH_LONG).show();
-                                    }
-                                }
-                            });
+                            //redirect to login layout!
+                            Intent intentr = new Intent(Register.this, Login.class);
+                            startActivity(intentr);
                         } else {
-                            Toast.makeText(Register.this, "Failed to register!\n Try again!", Toast.LENGTH_LONG).show();
+                            // If sign in fails, display a message to the user.
+                            Toast.makeText(Register.this, "Authentication failed.", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });

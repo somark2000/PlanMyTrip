@@ -5,6 +5,7 @@
     <string name="title_trips">Trips</string>
     <string name="title_profile">Profile</string>
     <string name="logout">LOGOUT</string>
+    <string name="edit_profile">Edit</string>
     <string name="greeting">Hello</string>
     <string name="required_email">Email is required!</string>
     <string name="valid_email">Please enter a valid email!</string>

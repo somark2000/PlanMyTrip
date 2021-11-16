@@ -59,10 +59,6 @@ public class Trips extends AppCompatActivity {
             public void onClick(View v) { openCreatePackageList(); }
         });
 
-//        case R.id.create_package:
-//        Intent intent4 = new Intent(Trips.this, Package.class);
-//        startActivity(intent4);
-//        break;
     }
 
     private void openCreatePackageList(){

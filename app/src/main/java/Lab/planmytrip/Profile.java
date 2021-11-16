@@ -9,25 +9,35 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.Objects;
 
 public class Profile extends AppCompatActivity {
 
     private TextView title;
-    private Button btn;
+    private EditText name;
+    private EditText surname;
+    private EditText email;
+    private EditText passw;
+    private EditText phone;
+    private EditText bdate;
+
+    private Button logout;
+    private Button edit;
 
     private FirebaseUser user;
-    private DatabaseReference reference;
+    private FirebaseFirestore db;
+    //private DatabaseReference reference;
 
     private String userID;
 
@@ -38,12 +48,20 @@ public class Profile extends AppCompatActivity {
 
         BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.nav_view);
 
+        db = FirebaseFirestore.getInstance();
         user= FirebaseAuth.getInstance().getCurrentUser();
-        reference= FirebaseDatabase.getInstance().getReference("Users");
-        userID= user.getUid();
+        userID = Objects.requireNonNull(user).getUid();
+        //reference= FirebaseDatabase.getInstance().getReference("Users");
 
         title=(TextView) findViewById(R.id.textView);
-        btn=(Button) findViewById(R.id.button);
+        name = (EditText) findViewById(R.id.prenume_p);
+        surname = (EditText) findViewById(R.id.nume_p);
+        email = (EditText) findViewById(R.id.email_p);
+        passw=(EditText)findViewById(R.id.passw_p);
+        phone = (EditText) findViewById(R.id.phone_p);
+        bdate = (EditText) findViewById(R.id.bdate_p);
+        edit = (Button) findViewById(R.id.edit_profile);
+        logout=(Button) findViewById(R.id.logout);
 
         Menu menu = bottomNavigationView.getMenu();
         MenuItem menuItem = menu.getItem(2);
@@ -75,26 +93,41 @@ public class Profile extends AppCompatActivity {
             }
         });
 
-        reference.child(userID).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                User userProfile= snapshot.getValue(User.class);
+        db.collection("users")
+                .document(userID)
+                .get()
+                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        User curr_user = documentSnapshot.toObject(User.class);
+                        if (curr_user != null) {
+                            String fullName = curr_user.fname + " " + curr_user.lname;
+                            title.setText(String.format("%s %s!", getString(R.string.greeting), fullName));
 
-                if(userProfile!=null){
-                    String fullName= userProfile.fname+" "+userProfile.lname;
-                    title.setText(String.format("%s\n%s!", getString(R.string.greeting), fullName));
-                }
-            }
+                            name.setText(curr_user.fname);
+                            surname.setText(curr_user.lname);
+                            phone.setText(curr_user.phone);
+                            email.setText(curr_user.email);
+                            passw.setText(curr_user.passw);
+                            bdate.setText(curr_user.date);
+                        } else {
+                            Toast.makeText(Profile.this, "Something wrong happened!" + userID, Toast.LENGTH_LONG).show();
+                        }
+                    }
+                });
 
+        edit.setText(R.string.edit_profile);
+        edit= (Button) findViewById(R.id.edit_profile);
+        edit.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(Profile.this,"Something wrong happened!",Toast.LENGTH_LONG).show();
+            public void onClick(View v) {
+                // TODO: Edit Profile (by Monix)
             }
         });
 
-        btn.setText(R.string.logout);
-        btn=(Button) findViewById(R.id.button);
-        btn.setOnClickListener(new View.OnClickListener() {
+        logout.setText(R.string.logout);
+        logout=(Button) findViewById(R.id.logout);
+        logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 FirebaseAuth.getInstance().signOut();
