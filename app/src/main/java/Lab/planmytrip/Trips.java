@@ -22,7 +22,7 @@ public class Trips extends AppCompatActivity {
         setContentView(R.layout.activity_trips);
 
         BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.nav_view);
-        createPackageList=(Button)findViewById(R.id.create_package_list);
+        createPackageList = (Button) findViewById(R.id.create_package_list);
 
         Menu menu = bottomNavigationView.getMenu();
         MenuItem menuItem = menu.getItem(2);
@@ -31,7 +31,7 @@ public class Trips extends AppCompatActivity {
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()){
+                switch (item.getItemId()) {
                     case R.id.navigation_map:
                         Intent intent1 = new Intent(Trips.this, Map.class);
                         startActivity(intent1);
@@ -56,13 +56,15 @@ public class Trips extends AppCompatActivity {
 
         createPackageList.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) { openCreatePackageList(); }
+            public void onClick(View v) {
+                openCreatePackageList();
+            }
         });
 
     }
 
-    private void openCreatePackageList(){
-        Intent intent=new Intent(this,Package.class);
+    private void openCreatePackageList() {
+        Intent intent = new Intent(this, Package.class);
         startActivity(intent);
     }
 }

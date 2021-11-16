@@ -29,7 +29,7 @@ public class Map extends AppCompatActivity {
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()){
+                switch (item.getItemId()) {
                     case R.id.navigation_map:
 //                        Intent intent1 = new Intent(Map.this, Map.class);
 //                        startActivity(intent1);
@@ -52,6 +52,6 @@ public class Map extends AppCompatActivity {
             }
         });
 
-        mapView=(MapView) findViewById(R.id.mapView);
+        mapView = (MapView) findViewById(R.id.mapView);
     }
 }

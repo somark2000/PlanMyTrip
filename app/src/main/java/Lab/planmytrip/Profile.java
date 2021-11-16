@@ -37,7 +37,6 @@ public class Profile extends AppCompatActivity {
 
     private FirebaseUser user;
     private FirebaseFirestore db;
-    //private DatabaseReference reference;
 
     private String userID;
 
@@ -49,19 +48,18 @@ public class Profile extends AppCompatActivity {
         BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.nav_view);
 
         db = FirebaseFirestore.getInstance();
-        user= FirebaseAuth.getInstance().getCurrentUser();
+        user = FirebaseAuth.getInstance().getCurrentUser();
         userID = Objects.requireNonNull(user).getUid();
-        //reference= FirebaseDatabase.getInstance().getReference("Users");
 
-        title=(TextView) findViewById(R.id.textView);
+        title = (TextView) findViewById(R.id.textView);
         name = (EditText) findViewById(R.id.prenume_p);
         surname = (EditText) findViewById(R.id.nume_p);
         email = (EditText) findViewById(R.id.email_p);
-        passw=(EditText)findViewById(R.id.passw_p);
+        passw = (EditText) findViewById(R.id.passw_p);
         phone = (EditText) findViewById(R.id.phone_p);
         bdate = (EditText) findViewById(R.id.bdate_p);
         edit = (Button) findViewById(R.id.edit_profile);
-        logout=(Button) findViewById(R.id.logout);
+        logout = (Button) findViewById(R.id.logout);
 
         Menu menu = bottomNavigationView.getMenu();
         MenuItem menuItem = menu.getItem(2);
@@ -70,7 +68,7 @@ public class Profile extends AppCompatActivity {
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()){
+                switch (item.getItemId()) {
                     case R.id.navigation_map:
                         Intent intent1 = new Intent(Profile.this, Map.class);
                         startActivity(intent1);
@@ -117,7 +115,7 @@ public class Profile extends AppCompatActivity {
                 });
 
         edit.setText(R.string.edit_profile);
-        edit= (Button) findViewById(R.id.edit_profile);
+        edit = (Button) findViewById(R.id.edit_profile);
         edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -126,12 +124,12 @@ public class Profile extends AppCompatActivity {
         });
 
         logout.setText(R.string.logout);
-        logout=(Button) findViewById(R.id.logout);
+        logout = (Button) findViewById(R.id.logout);
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 FirebaseAuth.getInstance().signOut();
-                startActivity(new Intent(Profile.this,Login.class));
+                startActivity(new Intent(Profile.this, Login.class));
             }
         });
     }

@@ -96,12 +96,12 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:ems="10"
+        android:importantForAutofill="no"
         android:inputType="textEmailAddress"
         android:minHeight="50dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/nume_p"
-        android:importantForAutofill="no" />
+        app:layout_constraintTop_toBottomOf="@+id/nume_p" />
 
     <EditText
         android:id="@+id/phone_p"
@@ -109,12 +109,12 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:ems="10"
+        android:importantForAutofill="no"
         android:inputType="phone"
         android:minHeight="50dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/bdate_p"
-        android:importantForAutofill="no" />
+        app:layout_constraintTop_toBottomOf="@+id/bdate_p" />
 
     <EditText
         android:id="@+id/prenume_p"
@@ -122,12 +122,12 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:ems="10"
+        android:importantForAutofill="no"
         android:inputType="textPersonName"
         android:minHeight="50dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
-        android:importantForAutofill="no" />
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <EditText
         android:id="@+id/nume_p"
@@ -147,11 +147,11 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:ems="10"
+        android:importantForAutofill="no"
         android:inputType="textPassword"
         android:minHeight="50dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/email_p"
-        android:importantForAutofill="no" />
+        app:layout_constraintTop_toBottomOf="@+id/email_p" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
