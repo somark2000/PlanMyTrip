@@ -32,4 +32,27 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="date_format">dd/MM/yyyy</string>
+
+    <string name="address">Address:</string>
+    <string name="updates">Updates:</string>
+    <string name="cell_tower_wifi">Cell Tower + Wifi</string>
+    <string name="sensor">Sensor:</string>
+    <string name="speed">Speed:</string>
+    <string name="accuracy">Accuracy:</string>
+    <string name="altitude">Altitude:</string>
+    <string name="lon">lon:</string>
+    <string name="_0_00">0.00</string>
+    <string name="lat">Lat:</string>
+    <string name="using_gps">Using GPS</string>
+    <string name="tower_wifi">Using Tower +Wifi</string>
+    <string name="not_available">Not available</string>
+    <string name="location_track">Location is being tracked</string>
+    <string name="location_not_tracked">Location not being tracked</string>
+    <string name="unable_location">Unable to get address</string>
+    <string name="waypoints">WayPoints</string>
+    <string name="_0">0</string>
+    <string name="add_waypoint">Add Waypoint</string>
+    <string name="show_waypoints">Show Waypoints</string>
+    <string name="show_map">Show Map</string>
+    <string name="title_activity_maps">MapsActivity</string>
 </resources>
