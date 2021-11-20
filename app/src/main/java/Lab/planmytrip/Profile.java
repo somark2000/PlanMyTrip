@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.format.DateFormat;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -107,7 +108,7 @@ public class Profile extends AppCompatActivity {
                             phone.setText(curr_user.phone);
                             email.setText(curr_user.email);
                             passw.setText(curr_user.passw);
-                            bdate.setText((CharSequence) curr_user.date);
+                            bdate.setText( String.format("%tF",curr_user.bdate));
                         } else {
                             Toast.makeText(Profile.this, "Something wrong happened!" + userID, Toast.LENGTH_LONG).show();
                         }

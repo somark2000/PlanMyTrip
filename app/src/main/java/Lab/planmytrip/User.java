@@ -6,7 +6,7 @@ import java.util.Date;
 public class User {
 
     public String fname, lname, passw, email, phone;
-    public Date date;
+    public Date bdate;
 
     public User() {
     }
@@ -16,7 +16,7 @@ public class User {
         this.lname = lname;
         this.email = email;
         this.passw = passw;
-        this.date = date;
+        this.bdate = date;
         this.phone = phone;
     }
 }
