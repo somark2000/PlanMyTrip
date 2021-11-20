@@ -67,7 +67,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             mMap.addMarker(markerOptions);
             lastLoaction=latLng;
         }
-        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(lastLoaction,13.0f));
+        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(lastLoaction,16.0f));
         mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
             @Override
             public boolean onMarkerClick(@NonNull Marker marker) {
