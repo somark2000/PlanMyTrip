@@ -17,6 +17,7 @@
         android:name="android.permission.ACCESS_NETWORK_STATE"/>
 
     <application
+        android:name=".MyApplication"
         android:allowBackup="true"
         android:fullBackupOnly="true"
         android:icon="@mipmap/ic_launcher"

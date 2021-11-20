@@ -35,6 +35,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
+        MyApplication myApplication=(MyApplication) getApplicationContext();
+        savedLocation=myApplication.getLocations();
     }
 
     /**
@@ -64,7 +67,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             mMap.addMarker(markerOptions);
             lastLoaction=latLng;
         }
-        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(lastLoaction,12.0f));
+        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(lastLoaction,13.0f));
         mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
             @Override
             public boolean onMarkerClick(@NonNull Marker marker) {

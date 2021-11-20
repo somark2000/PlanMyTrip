@@ -110,6 +110,7 @@ public class Map extends AppCompatActivity {
 
         mapView = (MapView) findViewById(R.id.mapView);
 
+
         //give values
 
         tv_lat = findViewById(R.id.tv_lat);
@@ -143,7 +144,6 @@ public class Map extends AppCompatActivity {
                 updateValues(locationResult.getLastLocation());
             }
         };
-
 
         sw_gps.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -273,6 +273,7 @@ public class Map extends AppCompatActivity {
 
     private void updateValues(Location location) {
         //update UI values
+
         tv_lat.setText(String.valueOf(location.getLatitude()));
         tv_lon.setText(String.valueOf(location.getLongitude()));
         tv_accuracy.setText(String.valueOf(location.getAccuracy()));
@@ -299,7 +300,7 @@ public class Map extends AppCompatActivity {
             tv_address.setText(R.string.unable_location);
         }
 
-        MyApplication myApplication=(MyApplication) getApplicationContext();
+        MyApplication myApplication= (MyApplication) getApplicationContext();
         locationList=myApplication.getLocations();
         tv_waypointCounts.setText(Integer.toString(locationList.size()));
     }

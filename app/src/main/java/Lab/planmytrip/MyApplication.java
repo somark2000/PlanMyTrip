@@ -2,6 +2,9 @@ package Lab.planmytrip;
 
 import android.app.Application;
 import android.location.Location;
+import android.os.Bundle;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
 import java.util.List;
