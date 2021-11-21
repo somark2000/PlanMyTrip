@@ -29,9 +29,11 @@
     <string name="birth_date">Birth Date</string>
     <string name="create_package_list">Create Package List</string>
     <string name="man_with_baggage">A man with Baggage.</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="date_format">dd/MM/yyyy</string>
+    <string name="date_format_edit">yyyy-MM-dd</string>
+    <string name="edit_profile_title">Edit your profile</string>
+    <string name="save">SAVE</string>
 
     <string name="address">Address:</string>
     <string name="updates">Updates:</string>

@@ -21,137 +21,226 @@
     <ImageView
         android:id="@+id/imageView3"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="250dp"
         android:contentDescription="@string/man_with_baggage"
-        app:layout_constraintBottom_toTopOf="@+id/textView"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/profile_background" />
 
-    <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/fragmentContainerView"
-        android:name="Lab.planmytrip.ProfileFragment"
+    <LinearLayout
+        android:id="@+id/profile_info"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:background="@color/light_grey"
-        app:layout_constraintBottom_toTopOf="@+id/nav_view"
-        app:layout_constraintEnd_toEndOf="@id/nav_view"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@id/imageView3"
-        app:layout_constraintTop_toTopOf="@+id/textView"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="250dp"
-        android:layout_marginEnd="50dp"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/profile_buttons"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView3">
 
-    <Button
-        android:id="@+id/edit_profile"
+        <TextView
+            android:id="@+id/title_profile"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="50dp"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <GridLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@color/white">
+
+            <TextView
+                android:id="@+id/name_tag"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:background="@color/light_grey"
+                android:text="@string/first_name"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/prenume_p"
+                android:layout_width="290dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start|end"
+                android:ems="10"
+                android:importantForAutofill="no"
+                android:textSize="16sp" />
+        </GridLayout>
+
+        <GridLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@color/white">
+
+            <TextView
+                android:id="@+id/surname_tag"
+                android:layout_width="100dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="start"
+                android:background="@color/light_grey"
+                android:text="@string/last_name"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/nume_p"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start|end"
+                android:ems="10"
+                android:textSize="16sp" />
+        </GridLayout>
+
+        <GridLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@color/white">
+
+            <TextView
+                android:id="@+id/email_tag"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:background="@color/light_grey"
+                android:text="@string/e_mail"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/email_p"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start|end"
+                android:ems="10"
+                android:importantForAutofill="no"
+                android:textSize="16sp" />
+        </GridLayout>
+
+        <GridLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@color/white">
+
+            <TextView
+                android:id="@+id/passw_tag"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:background="@color/light_grey"
+                android:text="@string/password"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/passw_p"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start|end"
+                android:ems="10"
+                android:importantForAutofill="no"
+                android:textSize="16sp" />
+        </GridLayout>
+
+        <GridLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@color/white">
+
+            <TextView
+                android:id="@+id/bdate_tag"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:background="@color/light_grey"
+                android:text="@string/birth_date"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/bdate_p"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start|end"
+                android:ems="10"
+                android:importantForAutofill="no"
+                android:textSize="16sp" />
+        </GridLayout>
+
+        <GridLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@color/white">
+
+            <TextView
+                android:id="@+id/phone_tag"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:background="@color/light_grey"
+                android:text="@string/phone_number"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/phone_p"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start|end"
+                android:ems="10"
+                android:importantForAutofill="no"
+                android:textSize="16sp" />
+        </GridLayout>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/profile_buttons"
         android:layout_width="0dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="250dp"
-        android:layout_marginBottom="5dp"
-        app:layout_constraintBottom_toTopOf="@+id/logout"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
-        app:layout_constraintVertical_bias="1" />
-
-    <Button
-        android:id="@+id/logout"
-        android:layout_width="0dp"
-        android:layout_height="50dp"
+        android:layout_height="110dp"
+        android:background="@color/light_grey"
+        android:orientation="vertical"
         app:layout_constraintBottom_toTopOf="@+id/nav_view"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintVertical_bias="1" />
+        app:layout_constraintTop_toBottomOf="@+id/profile_info">
 
-    <EditText
-        android:id="@+id/bdate_p"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:ems="10"
-        android:importantForAutofill="no"
-        android:inputType="date"
-        android:minHeight="50dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/passw_p" />
+        <Button
+            android:id="@+id/edit_profile"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginBottom="5dp"
 
-    <EditText
-        android:id="@+id/email_p"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:ems="10"
-        android:importantForAutofill="no"
-        android:inputType="textEmailAddress"
-        android:minHeight="50dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/nume_p" />
+            app:layout_constraintBottom_toTopOf="@+id/logout"
+            app:layout_constraintEnd_toEndOf="@id/logout"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="parent"
+            app:layout_constraintVertical_bias="1" />
 
-    <EditText
-        android:id="@+id/phone_p"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:ems="10"
-        android:importantForAutofill="no"
-        android:inputType="phone"
-        android:minHeight="50dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/bdate_p" />
+        <Button
+            android:id="@+id/logout"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
 
-    <EditText
-        android:id="@+id/prenume_p"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:ems="10"
-        android:importantForAutofill="no"
-        android:inputType="textPersonName"
-        android:minHeight="50dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
-
-    <EditText
-        android:id="@+id/nume_p"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:minHeight="50dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/prenume_p" />
-
-    <EditText
-        android:id="@+id/passw_p"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:ems="10"
-        android:importantForAutofill="no"
-        android:inputType="textPassword"
-        android:minHeight="50dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/email_p" />
+            app:layout_constraintBottom_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintVertical_bias="1" />
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

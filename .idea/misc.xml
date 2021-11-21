@@ -10,6 +10,7 @@
         <entry key="..\:/Faculta/semestrul5/PM/PlanMyTrip/app/src/main/res/drawable/ic_launcher_background.xml" value="0.14375" />
         <entry key="..\:/Faculta/semestrul5/PM/PlanMyTrip/app/src/main/res/drawable/ic_map.xml" value="0.1" />
         <entry key="..\:/Faculta/semestrul5/PM/PlanMyTrip/app/src/main/res/drawable/ic_trip.xml" value="0.26614583333333336" />
+        <entry key="..\:/Faculta/semestrul5/PM/PlanMyTrip/app/src/main/res/layout/activity_edit_profile.xml" value="0.22592592592592592" />
         <entry key="..\:/Faculta/semestrul5/PM/PlanMyTrip/app/src/main/res/layout/activity_home.xml" value="0.2" />
         <entry key="..\:/Faculta/semestrul5/PM/PlanMyTrip/app/src/main/res/layout/activity_index.xml" value="0.253125" />
         <entry key="..\:/Faculta/semestrul5/PM/PlanMyTrip/app/src/main/res/layout/activity_login.xml" value="0.2" />
@@ -39,5 +40,12 @@
   </component>
   <component name="ProjectType">
     <option name="id" value="Android" />
+  </component>
+  <component name="VisualizationToolProject">
+    <option name="state">
+      <ProjectState>
+        <option name="scale" value="0.4" />
+      </ProjectState>
+    </option>
   </component>
 </project>

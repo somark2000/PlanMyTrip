@@ -26,12 +26,12 @@ import java.util.Objects;
 public class Profile extends AppCompatActivity {
 
     private TextView title;
-    private EditText name;
-    private EditText surname;
-    private EditText email;
-    private EditText passw;
-    private EditText phone;
-    private EditText bdate;
+    private TextView name;
+    private TextView surname;
+    private TextView email;
+    private TextView passw;
+    private TextView phone;
+    private TextView bdate;
 
     private Button logout;
     private Button edit;
@@ -52,13 +52,13 @@ public class Profile extends AppCompatActivity {
         user = FirebaseAuth.getInstance().getCurrentUser();
         userID = Objects.requireNonNull(user).getUid();
 
-        title = (TextView) findViewById(R.id.textView);
-        name = (EditText) findViewById(R.id.prenume_p);
-        surname = (EditText) findViewById(R.id.nume_p);
-        email = (EditText) findViewById(R.id.email_p);
-        passw = (EditText) findViewById(R.id.passw_p);
-        phone = (EditText) findViewById(R.id.phone_p);
-        bdate = (EditText) findViewById(R.id.bdate_p);
+        title = (TextView) findViewById(R.id.title_profile);
+        name = (TextView) findViewById(R.id.prenume_p);
+        surname = (TextView) findViewById(R.id.nume_p);
+        email = (TextView) findViewById(R.id.email_p);
+        passw = (TextView) findViewById(R.id.passw_p);
+        phone = (TextView) findViewById(R.id.phone_p);
+        bdate = (TextView) findViewById(R.id.bdate_p);
         edit = (Button) findViewById(R.id.edit_profile);
         logout = (Button) findViewById(R.id.logout);
 
@@ -120,7 +120,7 @@ public class Profile extends AppCompatActivity {
         edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TODO: Edit Profile (by Monix)
+                startActivity(new Intent(Profile.this, EditProfile.class));
             }
         });
 
