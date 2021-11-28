@@ -156,12 +156,12 @@
         android:id="@+id/sw_locationsupdates"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="16dp"
         android:checked="true"
         android:minHeight="48dp"
         android:text="Location Updates"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.564"
+        app:layout_constraintHorizontal_bias="0.866"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/divider"
         tools:ignore="HardcodedText,UseSwitchCompatOrMaterialXml" />
@@ -171,6 +171,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="36dp"
+        android:checked="true"
+
         android:minHeight="48dp"
         android:text="GPS/SavePower"
         app:layout_constraintEnd_toEndOf="parent"

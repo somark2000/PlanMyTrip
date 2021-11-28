@@ -133,8 +133,8 @@ public class Map extends AppCompatActivity {
         //location stuff
 
         locationRequest = new com.google.android.gms.location.LocationRequest();
-        locationRequest.setInterval(3000);
-        locationRequest.setFastestInterval(5000);
+        locationRequest.setInterval(30);
+        locationRequest.setFastestInterval(50);
         locationRequest.setPriority(com.google.android.gms.location.LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY);
         locationCallBack = new LocationCallback() {
             @Override
@@ -260,6 +260,7 @@ public class Map extends AppCompatActivity {
                 public void onSuccess(Location location) {
                     updateValues(location);
                     currentLocation=location;
+                    locationList.add(currentLocation);
                 }
             });
         }
@@ -302,6 +303,6 @@ public class Map extends AppCompatActivity {
 
         MyApplication myApplication= (MyApplication) getApplicationContext();
         locationList=myApplication.getLocations();
-        tv_waypointCounts.setText(Integer.toString(locationList.size()));
+        tv_waypointCounts.setText(Integer.toString(locationList.size()-1));
     }
     }
