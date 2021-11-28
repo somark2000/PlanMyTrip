@@ -43,8 +43,8 @@ public class ShowSavedLocation extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 // Create a Uri from an intent string. Use the result to create an Intent.
-                Uri gmmIntentUri = Uri.parse("google.streetview:cbll="+locations.get(position).getLatitude()+
-                        ","+locations.get(position).getLongitude());
+                Uri gmmIntentUri = Uri.parse("google.streetview:cbll="+locations.get(position+1).getLatitude()+
+                        ","+locations.get(position+1).getLongitude());
 
                 // Create an Intent from gmmIntentUri. Set the action to ACTION_VIEW
                 Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);

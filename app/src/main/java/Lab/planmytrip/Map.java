@@ -177,12 +177,15 @@ public class Map extends AppCompatActivity {
         btn_newWaypoint.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //get location
+                //open maps for user to tap on desired destination
+                Intent intent=new Intent(Map.this,MapsActivity2.class );
+                startActivity(intent);
+
 
                 //add location to global list
-                MyApplication myApplication=(MyApplication) getApplicationContext();
-                locationList=myApplication.getLocations();
-                locationList.add(currentLocation);
+//                MyApplication myApplication=(MyApplication) getApplicationContext();
+//                locationList=myApplication.getLocations();
+//                locationList.add(currentLocation);
             }
         });
 
