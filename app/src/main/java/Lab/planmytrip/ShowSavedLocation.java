@@ -14,6 +14,9 @@ import android.widget.ListView;
 import java.util.ArrayList;
 import java.util.List;
 
+import Lab.planmytrip.Model.MyApplication;
+import Lab.planmytrip.Model.POI;
+
 public class ShowSavedLocation extends AppCompatActivity {
     ListView lv_savedlocations;
 
@@ -21,6 +24,7 @@ public class ShowSavedLocation extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_saved_location);
+        getSupportActionBar().hide();
 
         MyApplication myApplication=(MyApplication) getApplicationContext();
         List<Location> locations=myApplication.getLocations();

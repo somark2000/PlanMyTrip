@@ -1,4 +1,4 @@
-package Lab.planmytrip;
+package Lab.planmytrip.Model;
 
 
 import java.util.Date;

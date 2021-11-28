@@ -1,4 +1,4 @@
-package Lab.planmytrip;
+package Lab.planmytrip.Model;
 
 import android.content.Context;
 import android.location.Address;

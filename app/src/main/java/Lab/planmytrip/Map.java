@@ -31,6 +31,8 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.List;
 
+import Lab.planmytrip.Model.MyApplication;
+
 public class Map extends AppCompatActivity {
 
     private MapView mapView;
@@ -75,6 +77,7 @@ public class Map extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map);
+        getSupportActionBar().hide();
 
         BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.nav_view);
 

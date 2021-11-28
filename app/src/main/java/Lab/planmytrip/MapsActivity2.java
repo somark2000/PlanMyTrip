@@ -24,6 +24,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import java.io.IOException;
 import java.util.List;
 
+import Lab.planmytrip.Model.MyApplication;
 import Lab.planmytrip.databinding.ActivityMaps2Binding;
 
 public class MapsActivity2 extends FragmentActivity implements OnMapReadyCallback {

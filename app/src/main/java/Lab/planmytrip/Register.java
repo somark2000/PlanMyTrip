@@ -29,6 +29,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Objects;
 
+import Lab.planmytrip.Model.User;
+
 public class Register extends AppCompatActivity {
     private Button b1;
     private EditText fname, lname, passw1, passw2, mail, bdate, phonenr;//fname,lname,uname, passw,repassw,mail,date
@@ -47,6 +49,7 @@ public class Register extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+        getSupportActionBar().hide();
 
         // Initialize Firebase Auth
         mAuth = FirebaseAuth.getInstance();
