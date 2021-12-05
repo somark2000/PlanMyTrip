@@ -39,6 +39,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.io.IOException;
 import java.util.List;
@@ -70,12 +71,23 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback {
 
     //UI
     SearchView searchView;
+    FloatingActionButton packageButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map);
         getSupportActionBar().hide();
+
+        //floating button
+        packageButton= findViewById(R.id.package_button);
+        packageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(Map.this, Package.class);
+                startActivity(intent);
+            }
+        });
 
         //searchbar
         searchView = findViewById(R.id.idSearchView);
@@ -179,37 +191,6 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback {
         locationList = myApplication.getLocations();
         savedLocation = myApplication.getLocations();
         startLocationUpdates();
-
-//        btn_newWaypoint.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                //open maps for user to tap on desired destination
-//                Intent intent=new Intent(Map.this,MapsActivity2.class );
-//                startActivity(intent);
-//
-//
-//                //add location to global list
-////                MyApplication myApplication=(MyApplication) getApplicationContext();
-////                locationList=myApplication.getLocations();
-////                locationList.add(currentLocation);
-//            }
-//        });
-//
-//        btn_showWaypointList.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent=new Intent(Map.this,ShowSavedLocation.class);
-//                startActivity(intent);
-//            }
-//        });
-//
-//        btn_showMap.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent=new Intent(Map.this,MapsActivity.class );
-//                startActivity(intent);
-//            }
-//        });
 
         updateGPS();
 

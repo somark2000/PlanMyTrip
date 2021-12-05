@@ -52,4 +52,15 @@
         tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteX="-22dp" />
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/package_button"
+        android:layout_width="wrap_content"
+        android:layout_height="56dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="8dp"
+        android:clickable="true"
+        app:layout_constraintBottom_toTopOf="@+id/nav_view"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:src="@drawable/ic_baseline_luggage_24" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
