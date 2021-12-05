@@ -39,4 +39,3 @@ public class PackageItem {
         this.itemName = itemName;
     }
 }
-
