@@ -20,7 +20,7 @@ import com.google.type.LatLng;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Trips extends AppCompatActivity implements DialogCloseListener{
+public class Trips extends AppCompatActivity {
 
     private ListView tripsListView;
 
