@@ -76,6 +76,10 @@ public class Trips extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 //get data from DB
 
+                //move to maps fragment
+                Intent intent1 = new Intent(Trips.this, Map.class);
+                startActivity(intent1);
+                overridePendingTransition(0, 0);
             }
         });
 
