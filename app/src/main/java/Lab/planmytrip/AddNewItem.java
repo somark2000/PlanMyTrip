@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,8 +18,14 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.Objects;
 
 import Lab.planmytrip.Model.PackageItem;
 
@@ -29,7 +36,9 @@ public class AddNewItem extends BottomSheetDialogFragment {
     private EditText newItemText;
     private Button newItemSaveButton;
 
-    private FirebaseFirestore db;
+//    private FirebaseUser user;
+//    private FirebaseFirestore db;
+//    private String userID;
 
     public static AddNewItem newInstace() {
         return new AddNewItem();
@@ -54,9 +63,7 @@ public class AddNewItem extends BottomSheetDialogFragment {
         super.onViewCreated(view, savedInstanceState);
         newItemText = getView().findViewById(R.id.newItemText);
         newItemSaveButton = getView().findViewById(R.id.newItemButton);
-//        db = FirebaseFirestore.getInstance();
-//        user = FirebaseAuth.getInstance().getCurrentUser();
-//        userID = Objects.requireNonNull(user).getUid();
+
         boolean isUpdate = false;
 
         final Bundle bundle = getArguments();
@@ -67,6 +74,10 @@ public class AddNewItem extends BottomSheetDialogFragment {
             if (item.length() > 0)
                 newItemSaveButton.setTextColor(ContextCompat.getColor(getContext(), R.color.design_default_color_primary_dark));
         }
+
+//        db = FirebaseFirestore.getInstance();
+//        user = FirebaseAuth.getInstance().getCurrentUser();
+//        userID = Objects.requireNonNull(user).getUid();
 
         newItemText.addTextChangedListener(new TextWatcher() {
             @Override
@@ -99,7 +110,7 @@ public class AddNewItem extends BottomSheetDialogFragment {
                 } else {
                     PackageItem packageItem = new PackageItem();
                     packageItem.setItemName(text);
-                    packageItem.setStatus(0);
+                    packageItem.setStatus(false);
                     //insert packageItem
                 }
                 dismiss();

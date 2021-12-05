@@ -48,7 +48,7 @@ public class PackageItemAdapter extends RecyclerView.Adapter<PackageItemAdapter.
         //db open
         PackageItem packageItem = packageItemList.get(position);
         holder.check_box_item.setText(packageItem.getItemName());
-        holder.check_box_item.setChecked(toBoolean(packageItem.getStatus()));
+        holder.check_box_item.setChecked(packageItem.getStatus());
         holder.check_box_item.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
