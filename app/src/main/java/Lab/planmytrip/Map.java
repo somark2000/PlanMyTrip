@@ -323,5 +323,13 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback {
                 return false;
             }
         });
+
+        for (Location location:savedLocation) {
+            LatLng latLng=new LatLng(location.getLatitude(),location.getLongitude());
+            MarkerOptions markerOptions=new MarkerOptions();
+            markerOptions.position(latLng);
+            markerOptions.title("name");
+            mMap.addMarker(markerOptions);
+        }
     }
 }
