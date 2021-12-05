@@ -4,17 +4,25 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.type.LatLng;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Trips extends AppCompatActivity {
 
-    private Button createPackageList;
+    private ListView tripsListView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,9 +30,8 @@ public class Trips extends AppCompatActivity {
         setContentView(R.layout.activity_trips);
         getSupportActionBar().hide();
 
+        //navbar
         BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.nav_view);
-        createPackageList = (Button) findViewById(R.id.create_package_list);
-
         Menu menu = bottomNavigationView.getMenu();
         MenuItem menuItem = menu.getItem(1);
         menuItem.setChecked(true);
@@ -55,17 +62,31 @@ public class Trips extends AppCompatActivity {
             }
         });
 
-        createPackageList.setOnClickListener(new View.OnClickListener() {
+        //listview
+        tripsListView=findViewById(R.id.tripListView);
+        List<String> titles=new ArrayList<>();
+        List<LatLng> locations = new ArrayList<>();
+
+        //for trip in trips -> do title add in titles
+        //for trip in trips -> do location add in locations
+
+        tripsListView.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,titles));
+        tripsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onClick(View v) {
-                openCreatePackageList();
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                // Create a Uri from an intent string. Use the result to create an Intent.
+                Uri gmmIntentUri = Uri.parse("google.streetview:cbll="+locations.get(position+1).getLatitude()+
+                        ","+locations.get(position+1).getLongitude());
+
+                // Create an Intent from gmmIntentUri. Set the action to ACTION_VIEW
+                Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+                // Make the Intent explicit by setting the Google Maps package
+                mapIntent.setPackage("com.google.android.apps.maps");
+
+                // Attempt to start an activity that can handle the Intent
+                startActivity(mapIntent);
             }
         });
 
-    }
-
-    private void openCreatePackageList() {
-        Intent intent = new Intent(this, Package.class);
-        startActivity(intent);
     }
 }
