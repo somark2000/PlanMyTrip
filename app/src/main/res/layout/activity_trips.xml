@@ -18,15 +18,11 @@
         app:layout_constraintRight_toRightOf="parent"
         app:menu="@menu/bottom_nav_menu" />
 
-    <Button
-        android:id="@+id/create_package_list"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="35dp"
-        android:layout_marginEnd="190dp"
-        android:text="@string/create_package_list"
-        app:layout_constraintEnd_toEndOf="parent"
+    <ListView
+        android:id="@+id/tripListView"
+        android:layout_width="409dp"
+        android:layout_height="673dp"
+        android:layout_marginTop="8dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
