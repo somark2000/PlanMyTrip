@@ -20,7 +20,7 @@ import com.google.type.LatLng;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Trips extends AppCompatActivity {
+public class Trips extends AppCompatActivity implements DialogCloseListener{
 
     private ListView tripsListView;
 
@@ -74,17 +74,8 @@ public class Trips extends AppCompatActivity {
         tripsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                // Create a Uri from an intent string. Use the result to create an Intent.
-                Uri gmmIntentUri = Uri.parse("google.streetview:cbll="+locations.get(position+1).getLatitude()+
-                        ","+locations.get(position+1).getLongitude());
+                //get data from DB
 
-                // Create an Intent from gmmIntentUri. Set the action to ACTION_VIEW
-                Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
-                // Make the Intent explicit by setting the Google Maps package
-                mapIntent.setPackage("com.google.android.apps.maps");
-
-                // Attempt to start an activity that can handle the Intent
-                startActivity(mapIntent);
             }
         });
 
