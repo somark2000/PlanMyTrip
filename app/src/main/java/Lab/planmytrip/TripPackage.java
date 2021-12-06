@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -27,13 +28,15 @@ import Lab.planmytrip.Model.MyApplication;
 import Lab.planmytrip.Model.PackageItem;
 import Lab.planmytrip.Utils.DatabaseHandler;
 
-public class Package extends AppCompatActivity implements DialogCloseListener {
+public class TripPackage extends AppCompatActivity implements DialogCloseListener {
 
     private FirebaseUser user;
     private FirebaseFirestore db;
     private String userID;
 
-    private DatabaseHandler dbHandler;
+    private String currentTrip;
+
+    //    private DatabaseHandler dbHandler;
 
     private RecyclerView itemRecyclerView;
     private PackageItemAdapter packageItemAdapter;
@@ -51,7 +54,7 @@ public class Package extends AppCompatActivity implements DialogCloseListener {
         user = FirebaseAuth.getInstance().getCurrentUser();
         userID = Objects.requireNonNull(user).getUid();
 
-        dbHandler = new DatabaseHandler();
+//        dbHandler = new DatabaseHandler();
 
         itemRecyclerView = findViewById(R.id.itemsRecyclerView);
         itemRecyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -67,7 +70,7 @@ public class Package extends AppCompatActivity implements DialogCloseListener {
         packageItemList = new ArrayList<>();
 
         MyApplication myApplication = (MyApplication) getApplicationContext();
-        String currentTrip = myApplication.getTripID();
+        currentTrip = myApplication.getTripID();
         Log.e(">>>>>>>> it is OKAY", "???");
         System.out.println(currentTrip);
 
@@ -78,10 +81,11 @@ public class Package extends AppCompatActivity implements DialogCloseListener {
             public void onSuccess(DocumentSnapshot documentSnapshot) {
                 if (documentSnapshot.exists()) {
                     Log.e(">>>>>>>> it is OKAY", " documentSnapshot not null");
-                    System.out.println(documentSnapshot.getData().get("package"));
+                    System.out.println(Objects.requireNonNull(documentSnapshot.getData()).get("package"));
                     List<java.util.Map<String, Boolean>> packageArray = (List<java.util.Map<String, Boolean>>) documentSnapshot.getData().get("package");
 
                     int i = 0;
+                    assert packageArray != null;
                     for (java.util.Map<String, Boolean> entry : packageArray) {
                         i++;
                         int id = i;
@@ -107,7 +111,11 @@ public class Package extends AppCompatActivity implements DialogCloseListener {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AddNewItem.newInstace().show(getSupportFragmentManager(), AddNewItem.TAG);
+//                AddNewItem.newInstace().show(getSupportFragmentManager(), AddNewItem.TAG);
+
+                Intent switchActivityIntent = new Intent(TripPackage.this, AddNewItemActivity.class);
+//                switchActivityIntent.putExtra("id");
+                startActivity(switchActivityIntent);
             }
         });
     }

@@ -19,19 +19,19 @@ import java.util.List;
 
 import Lab.planmytrip.AddNewItem;
 import Lab.planmytrip.Model.PackageItem;
-import Lab.planmytrip.Package;
+import Lab.planmytrip.TripPackage;
 import Lab.planmytrip.R;
 
 public class PackageItemAdapter extends RecyclerView.Adapter<PackageItemAdapter.ViewHolder> {
     private List<PackageItem> packageItemList;
-    private Package activity;
+    private TripPackage activity;
 
     private FirebaseUser user;
     private FirebaseFirestore db;
     private String userID;
 
     //mai adauga db la constructor
-    public PackageItemAdapter(FirebaseFirestore db, Package activity) {
+    public PackageItemAdapter(FirebaseFirestore db, TripPackage activity) {
         this.db = db;
         this.activity = activity;
         this.packageItemList=new ArrayList<>();
