@@ -84,6 +84,9 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback {
         packageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(locationList==null) {
+                    Toast.makeText(this,"You need to select a trip first!",Toast.LENGTH_SHORT).show();
+                }
                 Intent intent=new Intent(Map.this, Package.class);
                 startActivity(intent);
             }
