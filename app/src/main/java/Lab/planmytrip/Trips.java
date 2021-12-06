@@ -34,6 +34,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.SortedMap;
 
 import Lab.planmytrip.Model.MyApplication;
 
@@ -44,21 +45,21 @@ public class Trips extends AppCompatActivity {
     private List<LatLng> locations = new ArrayList<>();
     private List<DocumentSnapshot> trips;
 
-    private String getTrip;
+    private String tripID;
+
+    public String getTripID() {
+        return tripID;
+    }
+
+    public void setTripID(String tripID) {
+        tripID = tripID;
+    }
 
     //DB stuff
     private FirebaseUser user;
     private FirebaseFirestore db;
 
     private String userID;
-
-    public String getGetTrip() {
-        return getTrip;
-    }
-
-    public void setGetTrip(String getTrip) {
-        this.getTrip = getTrip;
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -133,10 +134,6 @@ public class Trips extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                getTrip=(String)parent.getItemAtPosition(position);
-                Log.e(">>>>>>>> getTrip", getTrip);
-                System.out.println(getTrip);
-
                 //DB stuff
                 for(DocumentSnapshot documentSnapshot:trips){
                     if(titles.get(position).equals((String) documentSnapshot.getData().get("name")))
@@ -148,6 +145,9 @@ public class Trips extends AppCompatActivity {
                             LatLng latLng = new LatLng(lat,lng);
                             locations.add(latLng);
                         }
+                        MyApplication myApplication = (MyApplication) getApplicationContext();
+                        tripID=documentSnapshot.getId();
+                        myApplication.setTripID(tripID);
                     }
                 }
 

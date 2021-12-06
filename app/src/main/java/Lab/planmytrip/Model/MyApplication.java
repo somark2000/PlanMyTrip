@@ -9,6 +9,15 @@ import java.util.List;
 public class MyApplication extends Application {
     private static MyApplication singleton;
     private List<Location> locations;
+    private String tripID;
+
+    public String getTripID() {
+        return tripID;
+    }
+
+    public void setTripID(String tripID) {
+        this.tripID = tripID;
+    }
 
     public MyApplication getInstance(){
         return singleton;
