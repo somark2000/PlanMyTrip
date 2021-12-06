@@ -15,6 +15,7 @@ import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -40,9 +41,18 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.common.base.Predicates;
+import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.GeoPoint;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import Lab.planmytrip.Model.MyApplication;
 
@@ -73,6 +83,13 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback {
     SearchView searchView;
     FloatingActionButton packageButton;
 
+    //DB
+    private FirebaseFirestore db;
+    private FirebaseUser user;
+    private String userID;
+    private String tripID;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -80,15 +97,20 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback {
         getSupportActionBar().hide();
 
         //floating button
-        packageButton= findViewById(R.id.package_button);
+        packageButton= findViewById(R.id.package_butt);
         packageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(locationList==null) {
-                    Toast.makeText(this,"You need to select a trip first!",Toast.LENGTH_SHORT).show();
+                MyApplication myApplication = (MyApplication) getApplicationContext();
+                Log.e(">>>>>>>> it is not OKAY", "notrip selected");
+                System.out.println(myApplication.getTripID());
+                if(myApplication.getTripID()==null) {
+                    Toast.makeText(getApplicationContext(), "You need to select a trip first!", Toast.LENGTH_SHORT).show();
                 }
-                Intent intent=new Intent(Map.this, Package.class);
-                startActivity(intent);
+                else {
+                    Intent intent=new Intent(Map.this, Package.class);
+                    startActivity(intent);
+                }
             }
         });
 
@@ -307,8 +329,26 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback {
                 Location location=new Location(LocationManager.GPS_PROVIDER);
                 location.setLatitude(latLng.latitude);
                 location.setLongitude(latLng.longitude);
-                savedLocation.add(location);
                 Toast.makeText(getApplicationContext(),"Waypoint added",Toast.LENGTH_SHORT).show();
+                db = FirebaseFirestore.getInstance();
+                user = FirebaseAuth.getInstance().getCurrentUser();
+                userID = Objects.requireNonNull(user).getUid();
+                MyApplication myApplication=(MyApplication) getApplicationContext();
+                savedLocation=myApplication.getLocations();
+                savedLocation.add(location);
+                savedLocation= Lists.newArrayList(Iterables.filter(savedLocation, Predicates.notNull()));
+                tripID=myApplication.getTripID();
+                ArrayList<GeoPoint> checkpoints=new ArrayList<>();
+                Log.e("yay", "location");
+                System.out.println(savedLocation);
+                for(int i=0;i<savedLocation.size();++i){
+                    System.out.println(i);
+                    GeoPoint geoPoint=new GeoPoint(savedLocation.get(i).getLatitude(),savedLocation.get(i).getLongitude());
+                    checkpoints.add(geoPoint);
+                }
+                System.out.println(checkpoints);
+                db.collection("users").document(userID).collection("trips").document(tripID)
+                        .update("checkpoints",checkpoints);
             }
         });
 
@@ -327,12 +367,20 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback {
             }
         });
 
+        Log.e("yay", "location");
+
+        MyApplication myApplication=(MyApplication) getApplicationContext();
+        savedLocation=myApplication.getLocations();
+        System.out.println(savedLocation);
+
         for (Location location:savedLocation) {
-            LatLng latLng=new LatLng(location.getLatitude(),location.getLongitude());
-            MarkerOptions markerOptions=new MarkerOptions();
-            markerOptions.position(latLng);
-            markerOptions.title("name");
-            mMap.addMarker(markerOptions);
+            if(location.getLatitude()!=0.1&&location.getLongitude()!=0.1){
+                LatLng latLng=new LatLng(location.getLatitude(),location.getLongitude());
+                MarkerOptions markerOptions=new MarkerOptions();
+                markerOptions.position(latLng);
+                markerOptions.title("name");
+                mMap.addMarker(markerOptions);
+            }
         }
     }
 }

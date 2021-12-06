@@ -18,10 +18,12 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.internal.GenericIdpActivity;
@@ -39,21 +41,16 @@ import java.util.SortedMap;
 import Lab.planmytrip.Model.MyApplication;
 
 public class Trips extends AppCompatActivity {
-
+    //UI
     private ListView tripsListView;
+    private FloatingActionButton tripButton;
+
+    //Data storing
     private List<String> titles=new ArrayList<>();
     private List<LatLng> locations = new ArrayList<>();
     private List<DocumentSnapshot> trips;
 
     private String tripID;
-
-    public String getTripID() {
-        return tripID;
-    }
-
-    public void setTripID(String tripID) {
-        tripID = tripID;
-    }
 
     //DB stuff
     private FirebaseUser user;
@@ -66,6 +63,16 @@ public class Trips extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_trips);
         getSupportActionBar().hide();
+
+        //floating button
+        tripButton= findViewById(R.id.add_trip);
+        tripButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(Trips.this, AddTripActivity.class);
+                startActivity(intent);
+            }
+        });
 
         //navbar
         BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.nav_view);
@@ -138,6 +145,8 @@ public class Trips extends AppCompatActivity {
                 for(DocumentSnapshot documentSnapshot:trips){
                     if(titles.get(position).equals((String) documentSnapshot.getData().get("name")))
                     {
+                        Log.e(">>>>>>>>read", " documentSnapshot ");
+                        System.out.println(documentSnapshot.getData());
                         List<GeoPoint> geoPoints= (List<GeoPoint>) documentSnapshot.getData().get("checkpoints");
                         for(GeoPoint geoPoint:geoPoints){
                             double lat = geoPoint.getLatitude();

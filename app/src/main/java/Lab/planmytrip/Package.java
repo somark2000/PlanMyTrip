@@ -87,8 +87,10 @@ public class Package extends AppCompatActivity implements DialogCloseListener {
                         int id = i;
                         String itemName = String.valueOf(entry.get("itemName"));
                         Boolean status = entry.get("status");
-                        PackageItem packageItem = new PackageItem(id, status, itemName);
-                        packageItemList.add(packageItem);
+                        if(!itemName.equals("empty")){
+                            PackageItem packageItem = new PackageItem(id, status, itemName);
+                            packageItemList.add(packageItem);
+                        }
                     }
 
                     //for me, after need -> DELETE
