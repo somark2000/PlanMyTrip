@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import Lab.planmytrip.AddNewItem;
@@ -33,6 +34,9 @@ public class PackageItemAdapter extends RecyclerView.Adapter<PackageItemAdapter.
     public PackageItemAdapter(FirebaseFirestore db, Package activity) {
         this.db = db;
         this.activity = activity;
+        this.packageItemList=new ArrayList<>();
+
+
     }
 
     @NonNull
