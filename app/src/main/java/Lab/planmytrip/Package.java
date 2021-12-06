@@ -65,8 +65,12 @@ public class Package extends AppCompatActivity implements DialogCloseListener {
         //packageItemList=dbHandler.getAllPackageItems();
         packageItemList = new ArrayList<>();
 
+        //TODO:caca asta de trip==>comenteaza ca altfel pica
+        Trips trips = new Trips();
+        String currentTrip=trips.getGetTrip();
+
         db.collection("users").document(userID)
-                .collection("trips").document("MexKkh3whqgoo6joLJf1")
+                .collection("trips").document(currentTrip)
                 .get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
@@ -78,46 +82,33 @@ public class Package extends AppCompatActivity implements DialogCloseListener {
                     int i = 0;
                     for (java.util.Map<String, Boolean> entry : packageArray) {
                         i++;
-                        int id=i;
+                        int id = i;
                         String itemName = String.valueOf(entry.get("itemName"));
                         Boolean status = entry.get("status");
-                        PackageItem packageItem = new PackageItem( id, status, itemName);
+                        PackageItem packageItem = new PackageItem(id, status, itemName);
                         packageItemList.add(packageItem);
                     }
-////                        String itemName = entry.getKey();
-////                        java.util.Map<Long, Long> entryValue = entry.getValue();
-////                        Long id = entryValue.get("id");//.getClass().getName();
-////                        Long status = entryValue.get("status");//.getClass().getName();
-////                        PackageItem packageItem = new PackageItem(id.intValue(), status.intValue(), itemName);
-////                        packageItemList.add(packageItem);
 
-
-                //for me, after need -> DELETE
-                Log.e(">>>>>>>> packageItemList", String.valueOf(packageItemList));
-            } else
-
-            {
-                Log.e(">>>>>>>> error ", " documentSnapshot = null");
+                    //for me, after need -> DELETE
+                    Log.e(">>>>>>>> packageItemList before",String.valueOf(packageItemList));
+                    System.out.println(packageItemList);
+                    Collections.reverse(packageItemList);
+                    Log.e(">>>>>>>> packageItemList after",String.valueOf(packageItemList));
+                    System.out.println(packageItemList);
+                    packageItemAdapter.setItem(packageItemList);
+                } else {
+                    Log.e(">>>>>>>> error ", " documentSnapshot = null");
+                }
             }
-        }
-    });
+        });
 
-        Log.e(">>>>>>>> packageItemList before",String.valueOf(packageItemList));
-        System.out.println(packageItemList);
-        Collections.reverse(packageItemList);
-        Log.e(">>>>>>>> packageItemList after",String.valueOf(packageItemList));
-        System.out.println(packageItemList);
-        packageItemAdapter.setItem(packageItemList);
-
-        fab.setOnClickListener(new View.OnClickListener()
-
-    {
-        @Override
-        public void onClick (View v){
-        AddNewItem.newInstace().show(getSupportFragmentManager(), AddNewItem.TAG);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AddNewItem.newInstace().show(getSupportFragmentManager(), AddNewItem.TAG);
+            }
+        });
     }
-    });
-}
 
     @Override
     public void handleDialogClose(DialogInterface dialog) {
