@@ -23,6 +23,7 @@ import java.util.List;
 import java.util.Objects;
 
 import Lab.planmytrip.Adapter.PackageItemAdapter;
+import Lab.planmytrip.Model.MyApplication;
 import Lab.planmytrip.Model.PackageItem;
 import Lab.planmytrip.Utils.DatabaseHandler;
 
@@ -65,9 +66,10 @@ public class Package extends AppCompatActivity implements DialogCloseListener {
         //packageItemList=dbHandler.getAllPackageItems();
         packageItemList = new ArrayList<>();
 
-        //TODO:caca asta de trip==>comenteaza ca altfel pica
-        Trips trips = new Trips();
-        String currentTrip=trips.getGetTrip();
+        MyApplication myApplication = (MyApplication) getApplicationContext();
+        String currentTrip = myApplication.getTripID();
+        Log.e(">>>>>>>> it is OKAY", "???");
+        System.out.println(currentTrip);
 
         db.collection("users").document(userID)
                 .collection("trips").document(currentTrip)
@@ -90,10 +92,10 @@ public class Package extends AppCompatActivity implements DialogCloseListener {
                     }
 
                     //for me, after need -> DELETE
-                    Log.e(">>>>>>>> packageItemList before",String.valueOf(packageItemList));
+                    Log.e(">>>>>>>> packageItemList before", String.valueOf(packageItemList));
                     System.out.println(packageItemList);
                     Collections.reverse(packageItemList);
-                    Log.e(">>>>>>>> packageItemList after",String.valueOf(packageItemList));
+                    Log.e(">>>>>>>> packageItemList after", String.valueOf(packageItemList));
                     System.out.println(packageItemList);
                     packageItemAdapter.setItem(packageItemList);
                 } else {
