@@ -19,9 +19,6 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
-import android.widget.Switch;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -62,7 +59,7 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback {
 
     private static final int PERMISSION_FINE_LOCATION = 99;
 
-    private boolean zoom=false;
+    private boolean zoom = false;
 
     //current location
     Location currentLocation;
@@ -97,18 +94,17 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback {
         getSupportActionBar().hide();
 
         //floating button
-        packageButton= findViewById(R.id.package_butt);
+        packageButton = findViewById(R.id.package_butt);
         packageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 MyApplication myApplication = (MyApplication) getApplicationContext();
                 Log.e(">>>>>>>> it is not OKAY", "notrip selected");
                 System.out.println(myApplication.getTripID());
-                if(myApplication.getTripID()==null) {
+                if (myApplication.getTripID() == null) {
                     Toast.makeText(getApplicationContext(), "You need to select a trip first!", Toast.LENGTH_SHORT).show();
-                }
-                else {
-                    Intent intent=new Intent(Map.this, Package.class);
+                } else {
+                    Intent intent = new Intent(Map.this, TripPackage.class);
                     startActivity(intent);
                 }
             }
@@ -292,14 +288,14 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback {
         task.addOnSuccessListener(new OnSuccessListener<Location>() {
             @Override
             public void onSuccess(Location location) {
-                if(location!=null){
-                    LatLng lastLoaction=new LatLng(location.getLatitude(),location.getLongitude());
-                    currentLocation=new Location(LocationManager.GPS_PROVIDER);
+                if (location != null) {
+                    LatLng lastLoaction = new LatLng(location.getLatitude(), location.getLongitude());
+                    currentLocation = new Location(LocationManager.GPS_PROVIDER);
                     currentLocation.setLatitude(lastLoaction.latitude);
                     currentLocation.setLongitude(lastLoaction.longitude);
-                    if(zoom==false) {
-                        zoom=true;
-                        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(lastLoaction,16.0f));
+                    if (zoom == false) {
+                        zoom = true;
+                        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(lastLoaction, 16.0f));
                     }
                 }
             }
@@ -326,29 +322,29 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback {
             @Override
             public void onMapLongClick(@NonNull LatLng latLng) {
                 mMap.addMarker(new MarkerOptions().position(latLng));
-                Location location=new Location(LocationManager.GPS_PROVIDER);
+                Location location = new Location(LocationManager.GPS_PROVIDER);
                 location.setLatitude(latLng.latitude);
                 location.setLongitude(latLng.longitude);
-                Toast.makeText(getApplicationContext(),"Waypoint added",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Waypoint added", Toast.LENGTH_SHORT).show();
                 db = FirebaseFirestore.getInstance();
                 user = FirebaseAuth.getInstance().getCurrentUser();
                 userID = Objects.requireNonNull(user).getUid();
-                MyApplication myApplication=(MyApplication) getApplicationContext();
-                savedLocation=myApplication.getLocations();
+                MyApplication myApplication = (MyApplication) getApplicationContext();
+                savedLocation = myApplication.getLocations();
                 savedLocation.add(location);
-                savedLocation= Lists.newArrayList(Iterables.filter(savedLocation, Predicates.notNull()));
-                tripID=myApplication.getTripID();
-                ArrayList<GeoPoint> checkpoints=new ArrayList<>();
+                savedLocation = Lists.newArrayList(Iterables.filter(savedLocation, Predicates.notNull()));
+                tripID = myApplication.getTripID();
+                ArrayList<GeoPoint> checkpoints = new ArrayList<>();
                 Log.e("yay", "location");
                 System.out.println(savedLocation);
-                for(int i=0;i<savedLocation.size();++i){
+                for (int i = 0; i < savedLocation.size(); ++i) {
                     System.out.println(i);
-                    GeoPoint geoPoint=new GeoPoint(savedLocation.get(i).getLatitude(),savedLocation.get(i).getLongitude());
+                    GeoPoint geoPoint = new GeoPoint(savedLocation.get(i).getLatitude(), savedLocation.get(i).getLongitude());
                     checkpoints.add(geoPoint);
                 }
                 System.out.println(checkpoints);
                 db.collection("users").document(userID).collection("trips").document(tripID)
-                        .update("checkpoints",checkpoints);
+                        .update("checkpoints", checkpoints);
             }
         });
 
@@ -356,12 +352,12 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback {
             @Override
             public boolean onMarkerClick(@NonNull Marker marker) {
                 //further submenu popup
-                LatLng lastLoaction=new LatLng(marker.getPosition().latitude,marker.getPosition().longitude);
-                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(lastLoaction,16.0f));
-                Intent intent=new Intent(Intent.ACTION_VIEW, Uri.parse("google.navigation:q="+marker.getPosition().latitude+","+
-                        marker.getPosition().longitude+"&mode=d"));
+                LatLng lastLoaction = new LatLng(marker.getPosition().latitude, marker.getPosition().longitude);
+                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(lastLoaction, 16.0f));
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("google.navigation:q=" + marker.getPosition().latitude + "," +
+                        marker.getPosition().longitude + "&mode=d"));
                 intent.setPackage("com.google.android.apps.maps");
-                if(intent.resolveActivity(getPackageManager())!=null) startActivity(intent);
+                if (intent.resolveActivity(getPackageManager()) != null) startActivity(intent);
 
                 return false;
             }
@@ -369,14 +365,14 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback {
 
         Log.e("yay", "location");
 
-        MyApplication myApplication=(MyApplication) getApplicationContext();
-        savedLocation=myApplication.getLocations();
+        MyApplication myApplication = (MyApplication) getApplicationContext();
+        savedLocation = myApplication.getLocations();
         System.out.println(savedLocation);
 
-        for (Location location:savedLocation) {
-            if(location.getLatitude()!=0.1&&location.getLongitude()!=0.1){
-                LatLng latLng=new LatLng(location.getLatitude(),location.getLongitude());
-                MarkerOptions markerOptions=new MarkerOptions();
+        for (Location location : savedLocation) {
+            if (location.getLatitude() != 0.1 && location.getLongitude() != 0.1) {
+                LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
+                MarkerOptions markerOptions = new MarkerOptions();
                 markerOptions.position(latLng);
                 markerOptions.title("name");
                 mMap.addMarker(markerOptions);

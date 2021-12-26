@@ -22,8 +22,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.PlanMyTrip">
+<!--        <activity-->
+<!--            android:name=".AddTripActivity"-->
+<!--            android:exported="false" />-->
         <activity
-            android:name=".AddTripActivity"
+            android:name=".AddNewItemActivity"
             android:exported="false" />
         <activity
             android:name=".EditProfile"
@@ -57,7 +60,7 @@
             android:name=".ShowSavedLocation"
             android:exported="false" />
         <activity
-            android:name=".Package"
+            android:name=".TripPackage"
             android:exported="false" />
         <activity
             android:name=".Map"
