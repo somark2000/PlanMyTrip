@@ -79,6 +79,7 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback {
     //UI
     SearchView searchView;
     FloatingActionButton packageButton;
+    FloatingActionButton infoButton;
 
     //DB
     private FirebaseFirestore db;
@@ -107,6 +108,16 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback {
                     Intent intent = new Intent(Map.this, TripPackage.class);
                     startActivity(intent);
                 }
+            }
+        });
+
+        //info button
+        infoButton = findViewById(R.id.info_butt);
+        infoButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                PopUpClass popUpClass = new PopUpClass();
+                popUpClass.showPopupWindow(v);
             }
         });
 

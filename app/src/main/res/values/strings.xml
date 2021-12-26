@@ -61,4 +61,12 @@
     <string name="add_a_new_trip">Add a new trip</string>
     <string name="name">Name</string>
     <string name="add">Add</string>
+    <string name="textTitle">How to use PlanMyTrip</string>
+    <string name="textButton">Close</string>
+    <string name="infoText">
+        1. If you want to access the baggage for the current trip use the bottom left button\n
+        2. In order to add a new checkpoint to the current trip hold long on the desired location\n
+        3. Selecting a checkpoint on the map will automatically open the navigation from the current location to the selected Point of Interest\n
+        4. To access the baggage option please select a trip first, if none possible please create one
+    </string>
 </resources>
