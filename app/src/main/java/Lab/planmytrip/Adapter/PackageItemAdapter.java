@@ -1,7 +1,7 @@
 package Lab.planmytrip.Adapter;
 
 import android.content.Context;
-import android.os.Bundle;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,13 +11,11 @@ import android.widget.CompoundButton;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import Lab.planmytrip.AddNewItem;
+import Lab.planmytrip.AddNewItemActivity;
 import Lab.planmytrip.Model.PackageItem;
 import Lab.planmytrip.TripPackage;
 import Lab.planmytrip.R;
@@ -26,13 +24,13 @@ public class PackageItemAdapter extends RecyclerView.Adapter<PackageItemAdapter.
     private List<PackageItem> packageItemList;
     private TripPackage activity;
 
-    private FirebaseUser user;
-    private FirebaseFirestore db;
-    private String userID;
+//    private FirebaseUser user;
+//    private FirebaseFirestore db;
+//    private String userID;
 
     //mai adauga db la constructor
-    public PackageItemAdapter(FirebaseFirestore db, TripPackage activity) {
-        this.db = db;
+    public PackageItemAdapter(TripPackage activity){//, FirebaseFirestore db) {
+//        this.db = db;
         this.activity = activity;
         this.packageItemList=new ArrayList<>();
 
@@ -49,7 +47,6 @@ public class PackageItemAdapter extends RecyclerView.Adapter<PackageItemAdapter.
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        //db open
         PackageItem packageItem = packageItemList.get(position);
         holder.check_box_item.setText(packageItem.getItemName());
         holder.check_box_item.setChecked(packageItem.getStatus());
@@ -83,21 +80,15 @@ public class PackageItemAdapter extends RecyclerView.Adapter<PackageItemAdapter.
     }
 
     public void deleteItem(int position) {
-        PackageItem packageItem = packageItemList.get(position);
-        //db deleteItem
-        packageItemList.remove(position);
+        activity.deleteItem(position);
         notifyItemRemoved(position);
-
     }
 
     public void editItem(int position) {
-        PackageItem packageItem = packageItemList.get(position);
-        Bundle bundle = new Bundle();
-        bundle.putInt("id", packageItem.getId());
-        bundle.putString("packageItem", packageItem.getItemName());
-        AddNewItem fragment = new AddNewItem();
-        fragment.setArguments(bundle);
-        fragment.show(activity.getSupportFragmentManager(), AddNewItem.TAG);
+        //PackageItem packageItem = packageItemList.get(position);
+        Intent switchActivityIntent = new Intent(getContext(), AddNewItemActivity.class);
+        switchActivityIntent.putExtra("id",position);
+        getContext().startActivity(switchActivityIntent);
     }
 
 

@@ -5,7 +5,7 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.DialogInterface;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -16,19 +16,20 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
-import java.util.Collections;
+
 import java.util.List;
 import java.util.Objects;
 
 import Lab.planmytrip.Adapter.PackageItemAdapter;
 import Lab.planmytrip.Model.MyApplication;
 import Lab.planmytrip.Model.PackageItem;
-import Lab.planmytrip.Utils.DatabaseHandler;
 
-public class TripPackage extends AppCompatActivity implements DialogCloseListener {
+
+public class TripPackage extends AppCompatActivity {
 
     private FirebaseUser user;
     private FirebaseFirestore db;
@@ -36,7 +37,6 @@ public class TripPackage extends AppCompatActivity implements DialogCloseListene
 
     private String currentTrip;
 
-    //    private DatabaseHandler dbHandler;
 
     private RecyclerView itemRecyclerView;
     private PackageItemAdapter packageItemAdapter;
@@ -54,11 +54,9 @@ public class TripPackage extends AppCompatActivity implements DialogCloseListene
         user = FirebaseAuth.getInstance().getCurrentUser();
         userID = Objects.requireNonNull(user).getUid();
 
-//        dbHandler = new DatabaseHandler();
-
         itemRecyclerView = findViewById(R.id.itemsRecyclerView);
         itemRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        packageItemAdapter = new PackageItemAdapter(db, this);
+        packageItemAdapter = new PackageItemAdapter( this);
         itemRecyclerView.setAdapter(packageItemAdapter);
 
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new RecyclerPackageItemTouchHelper(packageItemAdapter));
@@ -66,13 +64,28 @@ public class TripPackage extends AppCompatActivity implements DialogCloseListene
 
         fab = findViewById(R.id.fab);
 
-        //packageItemList=dbHandler.getAllPackageItems();
         packageItemList = new ArrayList<>();
 
         MyApplication myApplication = (MyApplication) getApplicationContext();
         currentTrip = myApplication.getTripID();
         Log.e(">>>>>>>> it is OKAY", "???");
         System.out.println(currentTrip);
+
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent switchActivityIntent = new Intent(TripPackage.this, AddNewItemActivity.class);
+                startActivity(switchActivityIntent);
+            }
+        });
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        packageItemList = new ArrayList<>();
 
         db.collection("users").document(userID)
                 .collection("trips").document(currentTrip)
@@ -100,33 +113,24 @@ public class TripPackage extends AppCompatActivity implements DialogCloseListene
                     //for me, after need -> DELETE
                     Log.e(">>>>>>>> packageItemList before", String.valueOf(packageItemList));
                     System.out.println(packageItemList);
-                    Collections.reverse(packageItemList);
+                    //Collections.reverse(packageItemList);
                     Log.e(">>>>>>>> packageItemList after", String.valueOf(packageItemList));
                     System.out.println(packageItemList);
                     packageItemAdapter.setItem(packageItemList);
+                    packageItemAdapter.notifyDataSetChanged();
                 } else {
                     Log.e(">>>>>>>> error ", " documentSnapshot = null");
                 }
             }
         });
-
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-//                AddNewItem.newInstace().show(getSupportFragmentManager(), AddNewItem.TAG);
-
-                Intent switchActivityIntent = new Intent(TripPackage.this, AddNewItemActivity.class);
-//                switchActivityIntent.putExtra("id");
-                startActivity(switchActivityIntent);
-            }
-        });
     }
 
-    @Override
-    public void handleDialogClose(DialogInterface dialog) {
-        //packageItemList=dbHandler.getAllPackageItems();
-        Collections.reverse(packageItemList);
-        packageItemAdapter.setItem(packageItemList);
-        packageItemAdapter.notifyDataSetChanged();
+    public void deleteItem(int position) {
+        PackageItem packageItem = packageItemList.get(position);
+        packageItemList.remove(position);
+
+        db.collection("users").document(userID)
+                .collection("trips").document(currentTrip)
+                .update("package", FieldValue.arrayRemove(packageItem));
     }
 }
