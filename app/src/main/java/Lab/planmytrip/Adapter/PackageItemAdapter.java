@@ -24,17 +24,9 @@ public class PackageItemAdapter extends RecyclerView.Adapter<PackageItemAdapter.
     private List<PackageItem> packageItemList;
     private TripPackage activity;
 
-//    private FirebaseUser user;
-//    private FirebaseFirestore db;
-//    private String userID;
-
-    //mai adauga db la constructor
-    public PackageItemAdapter(TripPackage activity){//, FirebaseFirestore db) {
-//        this.db = db;
+    public PackageItemAdapter(TripPackage activity) {
         this.activity = activity;
-        this.packageItemList=new ArrayList<>();
-
-
+        this.packageItemList = new ArrayList<>();
     }
 
     @NonNull
@@ -54,15 +46,12 @@ public class PackageItemAdapter extends RecyclerView.Adapter<PackageItemAdapter.
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
-                    //db update status 1
+                    activity.updateStatus(packageItem.getId(), true);
                 } else {
-                    //db update status 0
+                    activity.updateStatus(packageItem.getId(), false);
                 }
             }
         });
-    }
-    private boolean toBoolean(int n) {
-        return n != 0;
     }
 
     @Override
@@ -87,7 +76,7 @@ public class PackageItemAdapter extends RecyclerView.Adapter<PackageItemAdapter.
     public void editItem(int position) {
         //PackageItem packageItem = packageItemList.get(position);
         Intent switchActivityIntent = new Intent(getContext(), AddNewItemActivity.class);
-        switchActivityIntent.putExtra("id",position);
+        switchActivityIntent.putExtra("id", position);
         getContext().startActivity(switchActivityIntent);
     }
 

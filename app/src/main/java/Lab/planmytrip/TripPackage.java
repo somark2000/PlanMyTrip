@@ -133,4 +133,17 @@ public class TripPackage extends AppCompatActivity {
                 .collection("trips").document(currentTrip)
                 .update("package", FieldValue.arrayRemove(packageItem));
     }
+
+    public void updateStatus(int packageItemID,boolean isChecked){
+        Log.e(">>>>>>>> update CHECK", String.valueOf(packageItemList));
+        System.out.println(packageItemList);
+        for (PackageItem packageItem:packageItemList) {
+            if(packageItem.getId()==packageItemID){
+                packageItem.setStatus(isChecked);
+            }
+        }
+        db.collection("users").document(userID)
+                .collection("trips").document(currentTrip)
+                .update("package", packageItemList);
+    }
 }

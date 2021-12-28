@@ -97,7 +97,7 @@ public class AddNewItemActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 String newItemName = newItemText.getText().toString();
-                if (finalIsUpdate) {
+                if (finalIsUpdate) {//update packageItem
                     Log.e(">>>>>>>> eeedit", finalID + "");
                     System.out.println(finalID);
 
@@ -110,11 +110,11 @@ public class AddNewItemActivity extends AppCompatActivity {
                     db.collection("users").document(userID)
                             .collection("trips").document(currentTrip)
                             .update("package", packageItemList);
-                } else {
+                } else {//insert packageItem
                     PackageItem packageItem = new PackageItem();
                     packageItem.setItemName(newItemName);
                     packageItem.setStatus(false);
-                    //insert packageItem
+
                     Object itemToBeSaved = new Object() {
                         public String itemName = newItemName;
                         public boolean status = false;
