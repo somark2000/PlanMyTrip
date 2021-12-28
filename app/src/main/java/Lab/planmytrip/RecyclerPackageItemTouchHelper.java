@@ -52,6 +52,7 @@ public class RecyclerPackageItemTouchHelper extends ItemTouchHelper.SimpleCallba
             dialog.show();
         } else {
             adapter.editItem(position);
+            adapter.notifyItemChanged(viewHolder.getAdapterPosition());
         }
     }
 
