@@ -98,7 +98,7 @@ public class Profile extends AppCompatActivity {
                 .get()
                 .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                     @Override
-                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                    public void onSuccess(@NonNull DocumentSnapshot documentSnapshot) {
                         User curr_user = documentSnapshot.toObject(User.class);
                         if (curr_user != null) {
                             String fullName = curr_user.fname + " " + curr_user.lname;

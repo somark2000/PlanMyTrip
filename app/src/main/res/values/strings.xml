@@ -10,6 +10,7 @@
     <string name="required_email">Email is required!</string>
     <string name="valid_email">Please enter a valid email!</string>
     <string name="required_password">Password is required!</string>
+    <string name="required_password2">2nd Password is required!</string>
     <string name="required_firstName">First name is required!</string>
     <string name="required_lastName">Last name is required!</string>
     <string name="required_birthdate">Birthdate is required!</string>
@@ -34,7 +35,6 @@
     <string name="date_format_edit">yyyy-MM-dd</string>
     <string name="edit_profile_title">Edit your profile</string>
     <string name="save">SAVE</string>
-
     <string name="address">Address:</string>
     <string name="updates">Updates:</string>
     <string name="cell_tower_wifi">Cell Tower + Wifi</string>
@@ -61,6 +61,8 @@
     <string name="add_a_new_trip">Add a new trip</string>
     <string name="name">Name</string>
     <string name="add">Add</string>
+    <string name="add_a_new_item">Add a new item</string>
+    <string name="package_item">item</string>
     <string name="textTitle">How to use PlanMyTrip</string>
     <string name="textButton">Close</string>
     <string name="infoText">
@@ -69,5 +71,7 @@
         3. Selecting a checkpoint on the map will automatically open the navigation from the current location to the selected Point of Interest\n
         4. To access the baggage option please select a trip first, if none possible please create one
     </string>
-    <string name="required_password2">2nd Password is required!</string>
+    <string name="register_onSuccess">User has been registered successfully!</string>
+    <string name="register_onFailure">Failed to register!\n Try again!</string>
+    <string name="authentication_failed">Authentication failed.</string>
 </resources>

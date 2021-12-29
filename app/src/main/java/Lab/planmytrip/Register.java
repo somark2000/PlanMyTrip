@@ -173,13 +173,15 @@ public class Register extends AppCompatActivity {
                                     .addOnSuccessListener(new OnSuccessListener<Void>() {
                                         @Override
                                         public void onSuccess(@NonNull Void aVoid) {
-                                            Toast.makeText(Register.this, "User has been registered successfully!", Toast.LENGTH_LONG).show();
+                                            String text=getString(R.string.register_onSuccess);
+                                            Toast.makeText(Register.this, text, Toast.LENGTH_LONG).show();
                                         }
                                     })
                                     .addOnFailureListener(new OnFailureListener() {
                                         @Override
                                         public void onFailure(@NonNull Exception e) {
-                                            Toast.makeText(Register.this, "Failed to register!\n Try again!", Toast.LENGTH_LONG).show();
+                                            String text=getString(R.string.register_onFailure);
+                                            Toast.makeText(Register.this, text, Toast.LENGTH_LONG).show();
                                         }
                                     });
 
@@ -188,7 +190,8 @@ public class Register extends AppCompatActivity {
                             startActivity(intentr);
                         } else {
                             // If sign in fails, display a message to the user.
-                            Toast.makeText(Register.this, "Authentication failed.", Toast.LENGTH_SHORT).show();
+                            String text=getString(R.string.authentication_failed);
+                            Toast.makeText(Register.this,text , Toast.LENGTH_SHORT).show();
                         }
                     }
                 });

@@ -112,9 +112,8 @@ public class TripPackage extends AppCompatActivity {
                         }
                     }
 
-//                    //for me, after need -> DELETE
-//                    Log.e(">>>>>>>> packageItemList", String.valueOf(packageItemList));
-//                    System.out.println(packageItemList);
+
+                    Log.e(">>>>>>>>TripPackage: packageItemList", String.valueOf(packageItemList));
                     packageItemAdapter.setItem(packageItemList);
                     packageItemAdapter.notifyDataSetChanged();
                 } else {
