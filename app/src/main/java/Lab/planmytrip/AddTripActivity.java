@@ -42,14 +42,15 @@ public class AddTripActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_trip);
+        getSupportActionBar().hide();
 
-        editText=findViewById(R.id.trip_name);
-        button=findViewById(R.id.new_trip);
+        editText = findViewById(R.id.trip_name);
+        button = findViewById(R.id.new_trip);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String name=editText.getText().toString().trim();
-                if(name.isEmpty()){
+                String name = editText.getText().toString().trim();
+                if (name.isEmpty()) {
                     editText.setError("Name required");
                     editText.requestFocus();
                     return;
@@ -57,34 +58,35 @@ public class AddTripActivity extends AppCompatActivity {
                 db = FirebaseFirestore.getInstance();
                 user = FirebaseAuth.getInstance().getCurrentUser();
                 userID = Objects.requireNonNull(user).getUid();
-                MyApplication myApplication=(MyApplication) getApplicationContext();
-                tripID=myApplication.getTripID();
-                ArrayList<GeoPoint> checkpoints=new ArrayList<>();
-                ArrayList<Map<String, Object>> packages=new ArrayList<>();
-                checkpoints.add(new GeoPoint(0.1,0.1));
-                java.util.Map<String,Object> pack=new HashMap<>();
-                pack.put("itemName","empty");
-                pack.put("status",false);
+                MyApplication myApplication = (MyApplication) getApplicationContext();
+                tripID = myApplication.getTripID();
+                ArrayList<GeoPoint> checkpoints = new ArrayList<>();
+                ArrayList<Map<String, Object>> packages = new ArrayList<>();
+                checkpoints.add(new GeoPoint(0.1, 0.1));
+                java.util.Map<String, Object> pack = new HashMap<>();
+                pack.put("itemName", "empty");
+                pack.put("status", false);
                 packages.add(pack);
-                Trip trip=new Trip();
+                Trip trip = new Trip();
                 trip.setName(name);
                 trip.setCheckpoints(checkpoints);
                 trip.setBaggage(packages);
-                db.collection("users").document(userID).collection("trips").add(trip)
+                db.collection("users").document(userID)
+                        .collection("trips").add(trip)
                         .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                    @Override
-                    public void onSuccess(DocumentReference documentReference) {
-                        Log.d("yay", "DocumentSnapshot written with ID: " + documentReference.getId());
-                        Intent intent=new Intent(AddTripActivity.this,Trips.class);
-                        startActivity(intent);
-                    }
-                })
+                            @Override
+                            public void onSuccess(@NonNull DocumentReference documentReference) {
+                                Log.d("AddTripActivity: yay", "DocumentSnapshot written with ID: " + documentReference.getId());
+                                Intent intent = new Intent(AddTripActivity.this, Trips.class);
+                                startActivity(intent);
+                            }
+                        })
                         .addOnFailureListener(new OnFailureListener() {
                             @Override
                             public void onFailure(@NonNull Exception e) {
-                                Log.w("sad", "Error adding document", e);
+                                Log.w("AddTripActivity: sad", "Error adding document", e);
                             }
-                        });;
+                        });
             }
         });
     }

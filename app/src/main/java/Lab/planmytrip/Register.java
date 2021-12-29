@@ -33,17 +33,15 @@ import Lab.planmytrip.Model.User;
 
 public class Register extends AppCompatActivity {
     private Button b1;
-    private EditText fname, lname, passw1, passw2, mail, bdate, phonenr;//fname,lname,uname, passw,repassw,mail,date
-    private DatePickerDialog picker;
+    private EditText fname, lname, passw1, passw2, mail, bdate, phonenr;
 
-    //progressbar????
+    private DatePickerDialog picker;
+    private SimpleDateFormat sdf;
 
     private FirebaseAuth mAuth;
     private FirebaseFirestore db;
 
     private String userID;
-
-    SimpleDateFormat sdf;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -124,11 +122,11 @@ public class Register extends AppCompatActivity {
             passw1.requestFocus();
             return;
         }
-//        if(s_passw2.isEmpty()){
-//            passw2.setError("2nd Password is required!");
-//            passw2.requestFocus();
-//            return;
-//        }
+        if(s_passw2.isEmpty()){
+            passw2.setError(getString(R.string.required_password2));
+            passw2.requestFocus();
+            return;
+        }
         if (!s_passw1.equals(s_passw2) || s_passw1.length() < 6) {
             passw2.setError(getString(R.string.validation_password));
             passw1.requestFocus();
@@ -174,7 +172,7 @@ public class Register extends AppCompatActivity {
                                     .set(user)
                                     .addOnSuccessListener(new OnSuccessListener<Void>() {
                                         @Override
-                                        public void onSuccess(Void aVoid) {
+                                        public void onSuccess(@NonNull Void aVoid) {
                                             Toast.makeText(Register.this, "User has been registered successfully!", Toast.LENGTH_LONG).show();
                                         }
                                     })

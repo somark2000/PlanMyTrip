@@ -1,14 +1,9 @@
 package Lab.planmytrip;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
 
-import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
-import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -23,7 +18,6 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.Objects;
 
 import Lab.planmytrip.Model.MyApplication;
@@ -44,6 +38,7 @@ public class AddNewItemActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_new_item);
+        getSupportActionBar().hide();
 
 
         newItemText = (EditText) findViewById(R.id.tb_package_item);
@@ -62,21 +57,22 @@ public class AddNewItemActivity extends AppCompatActivity {
                 .collection("trips").document(currentTrip)
                 .get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
-            public void onSuccess(DocumentSnapshot documentSnapshot) {
+            public void onSuccess(@NonNull DocumentSnapshot documentSnapshot) {
                 if (documentSnapshot.exists()) {
                     Log.e(">>>>>>>> eeedit", " documentSnapshot not null");
-                    List<java.util.Map<String, Boolean>> packageArray = (List<java.util.Map<String, Boolean>>) documentSnapshot.getData().get("package");
+                    List<java.util.Map<String, Boolean>> packageArray = (List<java.util.Map<String, Boolean>>) Objects.requireNonNull(documentSnapshot.getData()).get("package");
 
                     int i = 0;
-                    assert packageArray != null;
-                    for (java.util.Map<String, Boolean> entry : packageArray) {
-                        i++;
-                        int id = i;
-                        String itemName = String.valueOf(entry.get("itemName"));
-                        Boolean status = entry.get("status");
-                        if (!itemName.equals("empty")) {
-                            PackageItem packageItem = new PackageItem(id, status, itemName);
-                            packageItemList.add(packageItem);
+                    if (packageArray != null) {
+                        for (java.util.Map<String, Boolean> entry : packageArray) {
+                            i++;
+                            int id = i;
+                            String itemName = String.valueOf(entry.get("itemName"));
+                            Boolean status = entry.get("status");
+                            if (!itemName.equals("empty")) {
+                                PackageItem packageItem = new PackageItem(id, status, itemName);
+                                packageItemList.add(packageItem);
+                            }
                         }
                     }
                 }
@@ -109,7 +105,7 @@ public class AddNewItemActivity extends AppCompatActivity {
                     }
                     db.collection("users").document(userID)
                             .collection("trips").document(currentTrip)
-                            .update("package", packageItemList);
+                            .update("baggage", packageItemList); //package
                 } else {//insert packageItem
                     PackageItem packageItem = new PackageItem();
                     packageItem.setItemName(newItemName);
@@ -121,7 +117,7 @@ public class AddNewItemActivity extends AppCompatActivity {
                     };
                     db.collection("users").document(userID)
                             .collection("trips").document(currentTrip)
-                            .update("package", FieldValue.arrayUnion(itemToBeSaved));
+                            .update("baggage", FieldValue.arrayUnion(itemToBeSaved)); //package
                 }
                 finish();
             }

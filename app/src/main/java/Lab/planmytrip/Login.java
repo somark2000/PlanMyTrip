@@ -22,7 +22,6 @@ public class Login extends AppCompatActivity {
     EditText ed1, ed2;
 
     private FirebaseAuth mAuth;
-    //progressbar????
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -100,7 +100,7 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback {
             @Override
             public void onClick(View v) {
                 MyApplication myApplication = (MyApplication) getApplicationContext();
-                Log.e(">>>>>>>> it is not OKAY", "notrip selected");
+                Log.e(">>>>>>>>Map: it is not OKAY", "notrip selected");
                 System.out.println(myApplication.getTripID());
                 if (myApplication.getTripID() == null) {
                     Toast.makeText(getApplicationContext(), "You need to select a trip first!", Toast.LENGTH_SHORT).show();
@@ -252,15 +252,13 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback {
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
 
-        switch (requestCode) {
-            case PERMISSION_FINE_LOCATION:
-                if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    updateGPS();
-                } else {
-                    Toast.makeText(this, "This application requires permission to access location to work properly", Toast.LENGTH_SHORT).show();
-                    finish();
-                }
-                break;
+        if (requestCode == PERMISSION_FINE_LOCATION) {
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                updateGPS();
+            } else {
+                Toast.makeText(this, "This application requires permission to access location to work properly", Toast.LENGTH_SHORT).show();
+                finish();
+            }
         }
     }
 
@@ -270,7 +268,7 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback {
             //permission granted
             fusedLocationProviderClient.getLastLocation().addOnSuccessListener(this, new OnSuccessListener<Location>() {
                 @Override
-                public void onSuccess(Location location) {
+                public void onSuccess(@NonNull Location location) {
                     getlocation();
                     locationList.add(currentLocation);
                     savedLocation.add(currentLocation);
@@ -298,13 +296,13 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback {
         Task<Location> task = fusedLocationProviderClient.getLastLocation();
         task.addOnSuccessListener(new OnSuccessListener<Location>() {
             @Override
-            public void onSuccess(Location location) {
+            public void onSuccess(@NonNull Location location) {
                 if (location != null) {
                     LatLng lastLoaction = new LatLng(location.getLatitude(), location.getLongitude());
                     currentLocation = new Location(LocationManager.GPS_PROVIDER);
                     currentLocation.setLatitude(lastLoaction.latitude);
                     currentLocation.setLongitude(lastLoaction.longitude);
-                    if (zoom == false) {
+                    if (!zoom) {
                         zoom = true;
                         mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(lastLoaction, 16.0f));
                     }
@@ -346,7 +344,7 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback {
                 savedLocation = Lists.newArrayList(Iterables.filter(savedLocation, Predicates.notNull()));
                 tripID = myApplication.getTripID();
                 ArrayList<GeoPoint> checkpoints = new ArrayList<>();
-                Log.e("yay", "location");
+                Log.e("Map: yay", "location");
                 System.out.println(savedLocation);
                 for (int i = 0; i < savedLocation.size(); ++i) {
                     System.out.println(i);
@@ -374,7 +372,7 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback {
             }
         });
 
-        Log.e("yay", "location");
+        Log.e("Map: yay x2", "location");
 
         MyApplication myApplication = (MyApplication) getApplicationContext();
         savedLocation = myApplication.getLocations();

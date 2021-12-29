@@ -1,5 +1,6 @@
 package Lab.planmytrip;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -48,7 +49,7 @@ public class TripPackage extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_package);
-        Objects.requireNonNull(getSupportActionBar()).hide();
+        getSupportActionBar().hide();
 
         db = FirebaseFirestore.getInstance();
         user = FirebaseAuth.getInstance().getCurrentUser();
@@ -56,7 +57,7 @@ public class TripPackage extends AppCompatActivity {
 
         itemRecyclerView = findViewById(R.id.itemsRecyclerView);
         itemRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        packageItemAdapter = new PackageItemAdapter( this);
+        packageItemAdapter = new PackageItemAdapter(this);
         itemRecyclerView.setAdapter(packageItemAdapter);
 
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new RecyclerPackageItemTouchHelper(packageItemAdapter));
@@ -68,7 +69,7 @@ public class TripPackage extends AppCompatActivity {
 
         MyApplication myApplication = (MyApplication) getApplicationContext();
         currentTrip = myApplication.getTripID();
-        Log.e(">>>>>>>> it is OKAY", "???");
+        Log.e(">>>>>>>>TripPackage: it is OKAY", "???");
         System.out.println(currentTrip);
 
         fab.setOnClickListener(new View.OnClickListener() {
@@ -91,35 +92,33 @@ public class TripPackage extends AppCompatActivity {
                 .collection("trips").document(currentTrip)
                 .get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
-            public void onSuccess(DocumentSnapshot documentSnapshot) {
+            public void onSuccess(@NonNull DocumentSnapshot documentSnapshot) {
                 if (documentSnapshot.exists()) {
-                    Log.e(">>>>>>>> it is OKAY", " documentSnapshot not null");
-                    System.out.println(Objects.requireNonNull(documentSnapshot.getData()).get("package"));
-                    List<java.util.Map<String, Boolean>> packageArray = (List<java.util.Map<String, Boolean>>) documentSnapshot.getData().get("package");
+                    Log.e(">>>>>>>>TripPackage: it is OKAY", " documentSnapshot not null");
+                    System.out.println(Objects.requireNonNull(documentSnapshot.getData()).get("baggage"));//package
+                    List<java.util.Map<String, Boolean>> packageArray = (List<java.util.Map<String, Boolean>>) documentSnapshot.getData().get("baggage"); //package
 
                     int i = 0;
-                    assert packageArray != null;
-                    for (java.util.Map<String, Boolean> entry : packageArray) {
-                        i++;
-                        int id = i;
-                        String itemName = String.valueOf(entry.get("itemName"));
-                        Boolean status = entry.get("status");
-                        if(!itemName.equals("empty")){
-                            PackageItem packageItem = new PackageItem(id, status, itemName);
-                            packageItemList.add(packageItem);
+                    if (packageArray != null) {
+                        for (java.util.Map<String, Boolean> entry : packageArray) {
+                            i++;
+                            int id = i;
+                            String itemName = String.valueOf(entry.get("itemName"));
+                            Boolean status = entry.get("status");
+                            if (!itemName.equals("empty")) {
+                                PackageItem packageItem = new PackageItem(id, status, itemName);
+                                packageItemList.add(packageItem);
+                            }
                         }
                     }
 
-                    //for me, after need -> DELETE
-                    Log.e(">>>>>>>> packageItemList before", String.valueOf(packageItemList));
-                    System.out.println(packageItemList);
-                    //Collections.reverse(packageItemList);
-                    Log.e(">>>>>>>> packageItemList after", String.valueOf(packageItemList));
-                    System.out.println(packageItemList);
+//                    //for me, after need -> DELETE
+//                    Log.e(">>>>>>>> packageItemList", String.valueOf(packageItemList));
+//                    System.out.println(packageItemList);
                     packageItemAdapter.setItem(packageItemList);
                     packageItemAdapter.notifyDataSetChanged();
                 } else {
-                    Log.e(">>>>>>>> error ", " documentSnapshot = null");
+                    Log.e(">>>>>>>>TripPackage: error ", " documentSnapshot = null");
                 }
             }
         });
@@ -131,19 +130,19 @@ public class TripPackage extends AppCompatActivity {
 
         db.collection("users").document(userID)
                 .collection("trips").document(currentTrip)
-                .update("package", FieldValue.arrayRemove(packageItem));
+                .update("baggage", FieldValue.arrayRemove(packageItem));//package
     }
 
-    public void updateStatus(int packageItemID,boolean isChecked){
+    public void updateStatus(int packageItemID, boolean isChecked) {
         Log.e(">>>>>>>> update CHECK", String.valueOf(packageItemList));
         System.out.println(packageItemList);
-        for (PackageItem packageItem:packageItemList) {
-            if(packageItem.getId()==packageItemID){
+        for (PackageItem packageItem : packageItemList) {
+            if (packageItem.getId() == packageItemID) {
                 packageItem.setStatus(isChecked);
             }
         }
         db.collection("users").document(userID)
                 .collection("trips").document(currentTrip)
-                .update("package", packageItemList);
+                .update("baggage", packageItemList); //package
     }
 }

@@ -50,13 +50,12 @@ public class Trips extends AppCompatActivity {
     private List<LatLng> locations = new ArrayList<>();
     private List<DocumentSnapshot> trips;
 
-    private String tripID;
-
     //DB stuff
     private FirebaseUser user;
     private FirebaseFirestore db;
 
     private String userID;
+    private String tripID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -113,21 +112,20 @@ public class Trips extends AppCompatActivity {
 
         db.collection("users").document(userID).collection("trips").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
             @Override
-            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+            public void onSuccess(@NonNull QuerySnapshot queryDocumentSnapshots) {
                 if(!queryDocumentSnapshots.isEmpty()){
-                    Log.e(">>>>>>>> it is OKAY", " documentSnapshot not null");
-                    //System.out.println(queryDocumentSnapshots.getQuery().toString());
+                    Log.e(">>>>>>>>Trips: it is OKAY", " documentSnapshot not null");
                     trips=queryDocumentSnapshots.getDocuments();
                     for(DocumentSnapshot documentSnapshot:trips){
                         System.out.println(documentSnapshot.getData().get("name"));
                         titles.add((String) documentSnapshot.getData().get("name"));
                     }
-                    ArrayAdapter<String> titleAdapter=new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1,titles);
+                    ArrayAdapter<String> titleAdapter=new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_list_item_1,titles);
                     tripsListView.setAdapter(titleAdapter);
 
                 }
                 else {
-                    Log.e(">>>>>>>> it is not OKAY", " documentSnapshot null");
+                    Log.e(">>>>>>>>Trips: it is not OKAY", " documentSnapshot null");
                 }
             }
         });
@@ -135,7 +133,7 @@ public class Trips extends AppCompatActivity {
         //listview
         tripsListView=findViewById(R.id.tripListView);
 
-        tripsListView.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,titles));
+        tripsListView.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_list_item_1,titles));
 
         tripsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -145,7 +143,7 @@ public class Trips extends AppCompatActivity {
                 for(DocumentSnapshot documentSnapshot:trips){
                     if(titles.get(position).equals((String) documentSnapshot.getData().get("name")))
                     {
-                        Log.e(">>>>>>>>read", " documentSnapshot ");
+                        Log.e(">>>>>>>>Trips: read", " documentSnapshot ");
                         System.out.println(documentSnapshot.getData());
                         List<GeoPoint> geoPoints= (List<GeoPoint>) documentSnapshot.getData().get("checkpoints");
                         for(GeoPoint geoPoint:geoPoints){
@@ -162,7 +160,7 @@ public class Trips extends AppCompatActivity {
 
                 //location to list
                 MyApplication myApplication = (MyApplication) getApplicationContext();
-                Log.e(">>>>>>>> location size", " documentSnapshot null");
+                Log.e(">>>>>>>>Trips: location size", " documentSnapshot null");
                 System.out.println(locations.size());
                 List<Location> locationList=new ArrayList<>();
                 for(LatLng latLng:locations){
@@ -171,7 +169,7 @@ public class Trips extends AppCompatActivity {
                     location.setLongitude(latLng.longitude);
                     locationList.add(location);
                 }
-                Log.e(">>>>>>>> locations", " wait for singleton");
+                Log.e(">>>>>>>>Trips: locations", " wait for singleton");
 
                 myApplication.setLocations(locationList);
                 System.out.println(myApplication.getLocations());
