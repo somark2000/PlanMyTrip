@@ -42,6 +42,9 @@ public class TripPackage extends AppCompatActivity {
     private String currentTrip;
 
 
+    private FloatingActionButton infoButton;
+
+
     private RecyclerView itemRecyclerView;
     private PackageItemAdapter packageItemAdapter;
     private FloatingActionButton fab;
@@ -53,6 +56,16 @@ public class TripPackage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_package);
         getSupportActionBar().hide();
+
+        //info button
+        infoButton = findViewById(R.id.info_butt);
+        infoButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                PopUpClass2 popUpClass = new PopUpClass2();
+                popUpClass.showPopupWindow(v);
+            }
+        });
 
         db = FirebaseFirestore.getInstance();
         user = FirebaseAuth.getInstance().getCurrentUser();

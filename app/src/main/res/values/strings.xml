@@ -73,6 +73,9 @@
         5. If you want to access the baggage for the current trip use the bottom right button
 
     </string>
+    <string name="info_package">
+        If you want to edit or delete any item on the displayed list, please swipe left to delete or right to edit
+    </string>
     <string name="register_onSuccess">User has been registered successfully!</string>
     <string name="register_onFailure">Failed to register!\n Try again!</string>
     <string name="authentication_failed">Authentication failed.</string>
