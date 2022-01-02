@@ -74,9 +74,10 @@ public class PackageItemAdapter extends RecyclerView.Adapter<PackageItemAdapter.
     }
 
     public void editItem(int position) {
-        //PackageItem packageItem = packageItemList.get(position);
+        PackageItem packageItem = packageItemList.get(position);
         Intent switchActivityIntent = new Intent(getContext(), AddNewItemActivity.class);
         switchActivityIntent.putExtra("id", position);
+        switchActivityIntent.putExtra("itemName", packageItem.getItemName());
         getContext().startActivity(switchActivityIntent);
     }
 
