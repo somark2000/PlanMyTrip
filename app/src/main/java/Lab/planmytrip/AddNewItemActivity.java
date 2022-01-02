@@ -59,8 +59,8 @@ public class AddNewItemActivity extends AppCompatActivity {
             @Override
             public void onSuccess(@NonNull DocumentSnapshot documentSnapshot) {
                 if (documentSnapshot.exists()) {
-                    Log.e(">>>>>>>> eeedit", " documentSnapshot not null");
-                    List<java.util.Map<String, Boolean>> packageArray = (List<java.util.Map<String, Boolean>>) Objects.requireNonNull(documentSnapshot.getData()).get("package");
+                    Log.e(">>>>>>>> eeedit:save ", " documentSnapshot not null");
+                    List<java.util.Map<String, Boolean>> packageArray = (List<java.util.Map<String, Boolean>>) Objects.requireNonNull(documentSnapshot.getData()).get("baggage"); //package
 
                     int i = 0;
                     if (packageArray != null) {
