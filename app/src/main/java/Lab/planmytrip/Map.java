@@ -187,11 +187,13 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback {
                         break;
                     case R.id.navigation_profile:
                         Intent intent2 = new Intent(Map.this, Profile.class);
+                        finish();
                         startActivity(intent2);
                         overridePendingTransition(0, 0);
                         break;
                     case R.id.navigation_trips:
                         Intent intent3 = new Intent(Map.this, Trips.class);
+                        finish();
                         startActivity(intent3);
                         overridePendingTransition(0, 0);
                         break;
@@ -214,8 +216,6 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback {
             @Override
             public void onLocationResult(@NonNull LocationResult locationResult) {
                 super.onLocationResult(locationResult);
-                //save location
-                //updateValues(locationResult.getLastLocation());
             }
         };
 
@@ -384,7 +384,6 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback {
                 LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
                 MarkerOptions markerOptions = new MarkerOptions();
                 markerOptions.position(latLng);
-                markerOptions.title("name");
                 mMap.addMarker(markerOptions);
             }}
         }

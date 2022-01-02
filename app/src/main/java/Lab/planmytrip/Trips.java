@@ -85,11 +85,13 @@ public class Trips extends AppCompatActivity {
                 switch (item.getItemId()) {
                     case R.id.navigation_map:
                         Intent intent1 = new Intent(Trips.this, Map.class);
+                        finish();
                         startActivity(intent1);
                         overridePendingTransition(0, 0);
                         break;
                     case R.id.navigation_profile:
                         Intent intent2 = new Intent(Trips.this, Profile.class);
+                        finish();
                         startActivity(intent2);
                         overridePendingTransition(0, 0);
                         break;
@@ -176,6 +178,7 @@ public class Trips extends AppCompatActivity {
 
                 //move to maps fragment
                 Intent intent1 = new Intent(Trips.this, Map.class);
+                finish();
                 startActivity(intent1);
                 overridePendingTransition(0, 0);
             }

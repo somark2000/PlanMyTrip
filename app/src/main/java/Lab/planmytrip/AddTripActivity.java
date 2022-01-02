@@ -77,6 +77,7 @@ public class AddTripActivity extends AppCompatActivity {
                             @Override
                             public void onSuccess(@NonNull DocumentReference documentReference) {
                                 Log.d("AddTripActivity: yay", "DocumentSnapshot written with ID: " + documentReference.getId());
+                                finish();
                                 Intent intent = new Intent(AddTripActivity.this, Trips.class);
                                 startActivity(intent);
                             }

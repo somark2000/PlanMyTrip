@@ -73,6 +73,7 @@ public class Profile extends AppCompatActivity {
                 switch (item.getItemId()) {
                     case R.id.navigation_map:
                         Intent intent1 = new Intent(Profile.this, Map.class);
+                        finish();
                         startActivity(intent1);
                         overridePendingTransition(0, 0);
                         break;
@@ -83,6 +84,7 @@ public class Profile extends AppCompatActivity {
                         break;
                     case R.id.navigation_trips:
                         Intent intent3 = new Intent(Profile.this, Trips.class);
+                        finish();
                         startActivity(intent3);
                         overridePendingTransition(0, 0);
                         break;
