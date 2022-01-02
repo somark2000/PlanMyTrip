@@ -46,7 +46,7 @@ public class Trips extends AppCompatActivity {
     private FloatingActionButton tripButton;
 
     //Data storing
-    private List<String> titles=new ArrayList<>();
+    private List<String> titles = new ArrayList<>();
     private List<LatLng> locations = new ArrayList<>();
     private List<DocumentSnapshot> trips;
 
@@ -64,11 +64,11 @@ public class Trips extends AppCompatActivity {
         getSupportActionBar().hide();
 
         //floating button
-        tripButton= findViewById(R.id.add_trip);
+        tripButton = findViewById(R.id.add_trip);
         tripButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(Trips.this, AddTripActivity.class);
+                Intent intent = new Intent(Trips.this, AddTripActivity.class);
                 startActivity(intent);
             }
         });
@@ -115,47 +115,46 @@ public class Trips extends AppCompatActivity {
         db.collection("users").document(userID).collection("trips").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
             @Override
             public void onSuccess(@NonNull QuerySnapshot queryDocumentSnapshots) {
-                if(!queryDocumentSnapshots.isEmpty()){
+                if (!queryDocumentSnapshots.isEmpty()) {
                     Log.e(">>>>>>>>Trips: it is OKAY", " documentSnapshot not null");
-                    trips=queryDocumentSnapshots.getDocuments();
-                    for(DocumentSnapshot documentSnapshot:trips){
+                    trips = queryDocumentSnapshots.getDocuments();
+                    for (DocumentSnapshot documentSnapshot : trips) {
                         System.out.println(documentSnapshot.getData().get("name"));
                         titles.add((String) documentSnapshot.getData().get("name"));
                     }
-                    ArrayAdapter<String> titleAdapter=new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_list_item_1,titles);
+                    ArrayAdapter<String> titleAdapter = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_list_item_1, titles);
                     tripsListView.setAdapter(titleAdapter);
 
-                }
-                else {
+                } else {
                     Log.e(">>>>>>>>Trips: it is not OKAY", " documentSnapshot null");
+                    Toast.makeText(Trips.this, "There are no trips.\n Add a trip.", Toast.LENGTH_LONG).show();
                 }
             }
         });
 
         //listview
-        tripsListView=findViewById(R.id.tripListView);
+        tripsListView = findViewById(R.id.tripListView);
 
-        tripsListView.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_list_item_1,titles));
+        tripsListView.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, titles));
 
         tripsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
                 //DB stuff
-                for(DocumentSnapshot documentSnapshot:trips){
-                    if(titles.get(position).equals((String) documentSnapshot.getData().get("name")))
-                    {
+                for (DocumentSnapshot documentSnapshot : trips) {
+                    if (titles.get(position).equals((String) documentSnapshot.getData().get("name"))) {
                         Log.e(">>>>>>>>Trips: read", " documentSnapshot ");
                         System.out.println(documentSnapshot.getData());
-                        List<GeoPoint> geoPoints= (List<GeoPoint>) documentSnapshot.getData().get("checkpoints");
-                        for(GeoPoint geoPoint:geoPoints){
+                        List<GeoPoint> geoPoints = (List<GeoPoint>) documentSnapshot.getData().get("checkpoints");
+                        for (GeoPoint geoPoint : geoPoints) {
                             double lat = geoPoint.getLatitude();
                             double lng = geoPoint.getLongitude();
-                            LatLng latLng = new LatLng(lat,lng);
+                            LatLng latLng = new LatLng(lat, lng);
                             locations.add(latLng);
                         }
                         MyApplication myApplication = (MyApplication) getApplicationContext();
-                        tripID=documentSnapshot.getId();
+                        tripID = documentSnapshot.getId();
                         myApplication.setTripID(tripID);
                     }
                 }
@@ -164,9 +163,9 @@ public class Trips extends AppCompatActivity {
                 MyApplication myApplication = (MyApplication) getApplicationContext();
                 Log.e(">>>>>>>>Trips: location size", " documentSnapshot null");
                 System.out.println(locations.size());
-                List<Location> locationList=new ArrayList<>();
-                for(LatLng latLng:locations){
-                    Location location=new Location(LocationManager.GPS_PROVIDER);
+                List<Location> locationList = new ArrayList<>();
+                for (LatLng latLng : locations) {
+                    Location location = new Location(LocationManager.GPS_PROVIDER);
                     location.setLatitude(latLng.latitude);
                     location.setLongitude(latLng.longitude);
                     locationList.add(location);

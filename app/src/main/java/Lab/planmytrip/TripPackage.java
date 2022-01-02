@@ -11,6 +11,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -111,8 +114,10 @@ public class TripPackage extends AppCompatActivity {
                         }
                     }
 
-
                     Log.e(">>>>>>>>TripPackage: packageItemList", String.valueOf(packageItemList));
+                    if(packageItemList.size()==0){
+                        Toast.makeText(TripPackage.this,"There are no items.\n Add items.", Toast.LENGTH_LONG).show();
+                    }
                     packageItemAdapter.setItem(packageItemList);
                     packageItemAdapter.notifyDataSetChanged();
                 } else {
