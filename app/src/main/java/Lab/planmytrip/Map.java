@@ -379,13 +379,14 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback {
         System.out.println(savedLocation);
 
         for (Location location : savedLocation) {
+            if(location!=null){
             if (location.getLatitude() != 0.1 && location.getLongitude() != 0.1) {
                 LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
                 MarkerOptions markerOptions = new MarkerOptions();
                 markerOptions.position(latLng);
                 markerOptions.title("name");
                 mMap.addMarker(markerOptions);
-            }
+            }}
         }
     }
 }
