@@ -10,8 +10,10 @@
         android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="50dp"
         android:text="@string/register"
+        android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -22,19 +24,19 @@
         android:id="@+id/fname"
         android:layout_width="0dp"
         android:layout_height="50dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="100dp"
         android:ems="10"
         android:hint="@string/first_name"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/title" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/lname"
         android:layout_width="0dp"
         android:layout_height="50dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="10dp"
         android:ems="10"
         android:hint="@string/last_name"
         android:inputType="textPersonName"
@@ -46,7 +48,7 @@
         android:id="@+id/passw1"
         android:layout_width="0dp"
         android:layout_height="50dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="10dp"
         android:ems="10"
         android:hint="@string/password"
         android:inputType="textPassword"
@@ -58,7 +60,7 @@
         android:id="@+id/phone"
         android:layout_width="0dp"
         android:layout_height="50dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="10dp"
         android:ems="10"
         android:hint="@string/phone_number"
         android:inputType="phone"
@@ -70,7 +72,7 @@
         android:id="@+id/passw2"
         android:layout_width="0dp"
         android:layout_height="50dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="10dp"
         android:ems="10"
         android:hint="@string/password2"
         android:inputType="textPassword"
@@ -82,7 +84,7 @@
         android:id="@+id/emailReg"
         android:layout_width="0dp"
         android:layout_height="50dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="10dp"
         android:ems="10"
         android:hint="@string/e_mail"
         android:inputType="textEmailAddress"
@@ -90,21 +92,11 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/passw2" />
 
-    <Button
-        android:id="@+id/register_done"
-        android:layout_width="wrap_content"
-        android:layout_height="50dp"
-        android:layout_marginTop="5dp"
-        android:text="@string/done"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/bdate" />
-
     <EditText
         android:id="@+id/bdate"
         android:layout_width="0dp"
         android:layout_height="50dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="10dp"
         android:ems="10"
         android:hint="@string/birth_date"
         android:inputType="date"
@@ -112,4 +104,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/phone"
         tools:ignore="SpeakableTextPresentCheck" />
+
+    <Button
+        android:id="@+id/register_done"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_marginTop="20dp"
+        android:text="@string/done"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bdate" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -74,4 +74,5 @@
     <string name="register_onSuccess">User has been registered successfully!</string>
     <string name="register_onFailure">Failed to register!\n Try again!</string>
     <string name="authentication_failed">Authentication failed.</string>
+    <string name="welcome">WELCOME</string>
 </resources>
