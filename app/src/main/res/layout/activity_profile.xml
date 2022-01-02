@@ -149,6 +149,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="start|end"
                 android:ems="10"
+                android:inputType="textPassword"
                 android:importantForAutofill="no"
                 android:textSize="16sp" />
         </GridLayout>
