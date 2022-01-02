@@ -54,7 +54,7 @@ public class AddNewItemActivity extends AppCompatActivity {
         packageItemList = new ArrayList<>();
 
         if (getIntent().hasExtra("itemName")) {
-            newItemText.setText(getIntent().getExtras().getString("itemName"));
+            newItemText.setHint(getIntent().getExtras().getString("itemName"));
         }
 
         db.collection("users").document(userID)
