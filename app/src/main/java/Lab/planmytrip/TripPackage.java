@@ -75,7 +75,6 @@ public class TripPackage extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
                 Intent switchActivityIntent = new Intent(TripPackage.this, AddNewItemActivity.class);
                 startActivity(switchActivityIntent);
             }
