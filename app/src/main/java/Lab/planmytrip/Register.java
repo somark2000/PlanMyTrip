@@ -186,6 +186,7 @@ public class Register extends AppCompatActivity {
                                     });
 
                             //redirect to login layout!
+                            finish();
                             Intent intentr = new Intent(Register.this, Login.class);
                             startActivity(intentr);
                         } else {

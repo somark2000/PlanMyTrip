@@ -110,6 +110,7 @@ public class EditProfile extends AppCompatActivity {
                                 Toast.makeText(EditProfile.this, "Failed to update!", Toast.LENGTH_LONG).show();
                             }
                         });
+                finish();
                 startActivity(new Intent(EditProfile.this, Profile.class));
             }
         });
